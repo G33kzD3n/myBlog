@@ -1,0 +1,40 @@
+.img-cover{
+   height: 300px;
+}
+.img-thumbnail{
+    height: 190px;
+    width: 190px;
+    border-radius: 90%;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    position: relative;
+    bottom: 100px;
+    margin-bottom:3xp;
+}
+.follow-btn{
+    float:left;
+}
+.custom-card{
+    /* margin : 0px auto 0px auto; */
+    position: relative;
+    bottom: 100px;
+}
+.edit-btn{
+      float:left;
+      font-size: 20px;
+}
+.user-name{
+     margin-top:3xp;
+     padding-top:0px;
+     position: relative;
+     top:8px;
+    font-family: 'Acme', sans-serif;
+    font-size: 20px;
+    letter-spacing:1px;
+    text-align: right;
+}
+.active{
+    cursor: pointer;
+    color:rgba(21, 21, 253, 0.781);
+}

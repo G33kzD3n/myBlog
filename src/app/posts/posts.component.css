@@ -1,0 +1,27 @@
+.card-body{
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-top: 10px;
+    padding-right: 0px;
+
+}
+#card-img{
+    position: relative;
+    bottom: 10px;
+    border-radius: 90%;
+    border :solid rgba(254, 224, 244, .8) 1px;
+    box-shadow :6px 6px 7px gray;
+}
+.card-body-custom{
+    margin-left:0px;
+    /* border :solid rgba(254, 224, 244, .8) 1px;
+    box-shadow :6px 6px 7px gray; */
+    margin-bottom: 30px;
+    margin-left:0px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.a-title{
+    text-align: center;
+    padding-bottom:5px;
+}

@@ -1,0 +1,33 @@
+.card-img{
+    width: 100%;
+    height: 100%;
+    margin-left :0px;
+}
+#date{
+    font-family: 'Acme', sans-serif;
+    margin-bottom:0px;
+    font-size : 14px;
+    letter-spacing: 1px;
+    text-align-last: left;
+}
+#author{
+    font-family: 'Acme', sans-serif;
+     margin-top:5px;
+     text-align-last: left;
+}
+
+.comment-form{
+    margin-left: 10px;
+    margin-top:10px;
+}
+#publish-btn{
+    display: block;
+    position: relative;
+    top:5px;
+}
+.errorBox{
+    color:red;
+    margin-right :10px;
+    float:left;
+    display:block;
+}

@@ -1,0 +1,18 @@
+<h2>Post Tiker</h2>
+<div class="card" style="border:none; border-right:solid rgba(104, 103, 103, 0.952) 5px; overflow-y:scroll; height:200px">
+  <div *ngFor="let postTiker of myFollowersPosts">
+    <a routerLink="{{postTiker?.id}}" style="color:blue">
+      <h6 class="card-title tiker-title " style="margin-top:5px;"><strong>
+          {{postTiker.title}}</strong>
+      </h6>
+    </a>
+    <p style="font-family: 'Acme', sans-serif; letter-spacing:1px; margin-bottom:0px; padding-bottom:5px">
+      <small class="text-muted">Author:</small>
+      <b>{{postTiker.user.name}}</b> ({{postTiker.user.authorName}})<br>
+      <small class="text-muted">
+        Last updated {{ postTiker.updatedAt.date | date:"MMM dd yyyy 'at' hh:mm a"}}
+      </small><br>
+    </p>
+    <hr class="style-three">
+  </div>
+</div>

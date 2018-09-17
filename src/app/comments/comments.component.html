@@ -1,0 +1,49 @@
+<div id="comments-block">
+  <h3>Comments for this post</h3>
+  <div class="alert alert-info alert-dismissible show" role="alert" *ngIf="noMoreComments === true">
+    <strong>Holy guacamole!</strong>No more Comments.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="my-comments" id="add-scroll-bar">
+    <blockquote *ngFor="let comment of comments">
+      <p class="comment-authorname" style="font-family: 'Acme', sans-serif; letter-spacing:1px">
+        <span>{{comment.user.authorName}}</span>
+        <span style="font-family: 'Montserrat', sans-serif;"> on</span>
+        <span>{{comment.updatedAt.date | date:"MMM dd yyyy 'at' hh:mm a"}}</span>
+      </p>
+      <span style="font-family: 'Montserrat', sans-serif;" data-canedit="true" class="comment-message">
+        {{comment.body}}
+      </span>
+      <i *ngIf="username === comment.user.authorName" (click)="editComment(comment.body, comment.id)" class="fa fa-pencil" style="padding-left:5px">
+      </i>
+    </blockquote>
+  </div>
+  <a  (click)="loadPreviousComments(next)" style="text-decoration-line: underline; color:blue;">view previous
+    comments</a>
+</div>
+<div class="row">
+  <div class="col-md-12 col-xs-12 col-sm-12">
+    <div *ngIf="published === true" class="alert alert-warning alert-dismissible show" role="alert">
+      <strong>Holy guacamole!</strong> Comment posted successfully.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form *ngIf="loggedIn === true" [formGroup]="commentForm" (ngSubmit)="publishComment(commentForm)" class="comment-form">
+      <div class="form-group">
+        <textarea rows="5" formControlName="body" cols="10" type="text" class="form-control" name="body" id="body">
+          Enter the body for comment. </textarea>
+      </div>
+      <div class="errorBox" *ngIf="commentForm.controls['body'].hasError('required') && commentForm.controls['body'].touched">
+        *Body is required.
+      </div>
+      <div class="errorBox" *ngIf="commentForm.controls['body'].hasError('minlength') && commentForm.controls['body'].touched">
+        *Body must be more than 5.
+      </div>
+      <button class="btn btn-primary" id="publish-btn" [disabled]="!commentForm.valid" type="submit">Publish
+      </button>
+    </form>
+  </div>
+</div>

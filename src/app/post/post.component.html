@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h2 style="margin: auto;">{{heading}}</h2>
+    <div *ngIf="published === true" class="alert alert-warning alert-dismissible show" role="alert">
+      <strong>Holy guacamole!</strong> Post Created successfully.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="postForm"  (ngSubmit)="postBlog(postForm)"class="center" style="margin-left:20%">
+      <div class="form-group">
+          <input type="text" formControlName="title" class="form-control" name="title" id="title" placeholder="Enter the title here.">
+        </div>
+        <div class="errorBox" *ngIf="postForm.controls['title'].hasError('required') && postForm.controls['title'].touched">
+          *Title is required.
+        </div>
+        <div class="errorBox" *ngIf="postForm.controls['title'].hasError('minlength') && postForm.controls['title'].touched">
+          *Length must be more than 20.
+        </div>
+        <div class="form-group">
+          <textarea rows="5" formControlName="body" cols="10" type="text" class="form-control" name="body" id="body"
+            >
+          Enter the body. </textarea>
+        </div>
+        <div class="errorBox" *ngIf="postForm.controls['body'].hasError('required') && postForm.controls['body'].touched">
+          *Body is required.
+        </div>
+        <div class="errorBox" *ngIf="postForm.controls['body'].hasError('minlength') && postForm.controls['body'].touched">
+          *Body must be more than 20.
+        </div>
+        <div class="form-group" style="float: left;" >
+          <input name="image" type="file" (change)="fileUpload($event)">
+        </div>
+        <button class="btn btn-primary" [disabled]="!postForm.valid" type="submit">Publish
+        </button>
+    </form>
+  </div>
+</div>

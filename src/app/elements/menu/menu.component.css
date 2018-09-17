@@ -1,0 +1,14 @@
+#logout{
+    color: rgba(0,0,0,.5);
+}
+#logout:hover{
+    color: rgb(20,20,20);
+    cursor: pointer;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 10px solid #42A948; /* green */
+}
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
