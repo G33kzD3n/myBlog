@@ -1,28 +1,39 @@
 <h2 style="background:#f8f9fa; width:100%">Top 20 Tikers</h2>
-<div class="card" style="border:none;overflow-y:scroll; height:350px" >
+<div class="card" style="border:none;overflow-y:scroll; height:350px">
   <div *ngFor="let activity of activities">
     <a style="color:black">
-    <h6 class="card-title tiker-title " style="margin-top:5px;"><strong>
-          {{activity.author_name}}{{activity.type==="post" ?' published a post' :""}}
-          {{activity.type==="comment"? "commented on post " :""}}<a routerLink="{{activity.post_id}}">{{activity.type==="comment"? activity.post_id:""}}</a>
-        {{activity.type==="follower" ? 'followed you' :""}}</strong>
-        </h6>
+      <h6 class="card-title tiker-title " style="margin-top:5px;"><strong>
+          <a *ngIf="activity.type === 'like'" routerLink="../users/{{activity.user_id}}">{{activity.author_name}} </a>
+          {{activity.type==="like" ? 'Liked the post':""}} <a routerLink="{{activity.post_id}}">
+            {{activity.type==="like"?activity.post_id:""}}</a>
+
+          <a *ngIf="activity.type === 'post' " routerLink="../users/{{activity.user_id}}">{{activity.author_name}}</a>
+          {{activity.type ==="post" ?' published a post':""}}
+          <a *ngIf="activity.type === 'post'" routerLink="{{activity.post_id}}">{{activity.post_id}} </a>
+
+          <a *ngIf="activity.type === 'comment'" routerLink="../users/{{activity.user_id}}">{{activity.author_name}}</a>
+          {{activity.type === "comment" ? "commented on post " :""}}
+          <a routerLink="{{activity.post_id}}">
+            {{activity.type === "comment" ? activity.post_id:""}}</a>
+
+          <a *ngIf="activity.type === 'follower' " routerLink="../users/{{activity.user_id}}">
+            {{activity.body}}
+          </a>{{activity.type==="follower" ? 'followed you' :""}}
+        </strong>
+      </h6>
     </a>
     <span class="text-muted" *ngIf="activity.type === 'comment'">
       At {{ activity.updated_at | date:" hh:mm a"}}
     </span>
-    <span class="text-muted" *ngIf="activity.type === 'post'">
+    <span class="text-muted" *ngIf="activity.type === 'post' ">
       At {{ activity.updated_at | date:" hh:mm a"}}
     </span>
-    <span class="text-muted" *ngIf="activity.type === 'follower'">
+    <span class="text-muted" *ngIf="activity.type === 'follower' ">
       At {{ activity.updated_at | date:" hh:mm a"}}
     </span>
-    <p class="text-muted" *ngIf="activity.type === 'follower'">
-      FollowerName: {{activity.body}}
+    <p class="text-muted" *ngIf="activity.type === 'like'">
+      At {{ activity.updated_at | date:" hh:mm a"}}
     </p>
-      <!-- <small class="text-muted" *ngIf="activity.type === post">
-        Title: <a routerLink="{{activity.id}}">{{activity.title}}</a>
-      </small><br> -->
     <hr class="style-three">
   </div>
 </div>
