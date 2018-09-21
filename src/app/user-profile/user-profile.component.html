@@ -1,52 +1,51 @@
 <div class="row">
   <div class="col-md-8">
     <div class="card" style="margin-left:10px;width:100%;">
-      <img class="card-img-top img-cover" src="../../assets/img/pic.jpg" alt="Card image cap"
-      height="20%" >
+      <img class="card-img-top img-cover" src="../../assets/img/pic.jpg" alt="Card image cap" height="20%">
       <img class="card-img-top img-thumbnail" src="../../assets/img/pic.jpg" alt="Card image cap">
       <div class="card-body custom-card">
         <div class="row head-name-follow">
           <div class="col-md-6">
-            <h5  class="card-title user-name">{{user?.name}}</h5>
+            <h5 class="card-title user-name">{{user?.name}}</h5>
           </div>
           <div class="col-md-6" *ngIf="loggedInUserId == user?.id">
             <span style="font-size:20px;padding-right: 10px">Edit </span>
             <span class="fa fa-edit" aria-hidden="true" style="font-size:20px;"></span>
           </div>
           <div class="col-md-6" *ngIf="loggedInUserId != user?.id ">
-            <button  (click)="follow(user?.id)" class="btn btn-primary follow-btn">{{follower=== 1 ?"UnFollow":"Follow"}}</button>
+            <button (click)="follow(user?.id)" class="btn btn-primary follow-btn">{{follower=== 1
+              ?"UnFollow":"Follow"}}</button>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="col-md-4" *ngIf="loggedInUserId == user?.id">
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" (click)="getFollowers()">Followers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{showFollowing===true ?'active':''}}" (click)="getFollowing()">Following</a>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" (click)="getFollowers()">Followers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{showFollowing===true ?'active':''}}" (click)="getFollowing()">Following</a>
+      </li>
+    </ul>
+    <div style="border:none">
+      <div *ngIf="showFollowers === true">
+        <ul class="list-group" *ngFor="let follower of myFollowers">
+          <li class="list-group-item " style="border-top:none">
+            <a routerLink="../users/{{follower?.id}}">
+              <span style="font-size: 16px;">{{follower.author_name}}</span>
+            </a>
+        </ul>
+      </div>
+      <div *ngIf="showFollowing === true">
+        <ul class="list-group" *ngFor="let following of followingTo">
+          <li class="list-group-item">
+            <a routerLink="../users/{{following?.id}}">
+              <span style="font-size: 16px;">{{following.authorName}}</span>
+            </a>
           </li>
         </ul>
-        <div style="border:none">
-          <div *ngIf="showFollowers === true">
-            <ul class="list-group" *ngFor="let follower of myFollowers">
-              <li  class="list-group-item " style="border-top:none">
-                <a routerLink="../users/{{follower?.id}}">
-                  <span style="font-size: 16px;">{{follower.author_name}}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div *ngIf="showFollowing === true">
-            <ul class="list-group" *ngFor="let following of followingTo">
-              <li class="list-group-item">
-                <a routerLink="../users/{{following?.id}}">
-                  <span style="font-size: 16px;">{{following.authorName}}</span>
-                </a>
-              </li>
-          </ul>
-        </div>
+      </div>
     </div>
-</div>
+  </div>

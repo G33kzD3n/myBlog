@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="fr">
+  <file original="ng.template" id="ngi18n">
+    <unit id="2275394075005313704">
+      <notes>
+        <note category="description"> The name of author</note>
+        <note category="meaning">author name </note>
+        <note category="location">app/posts/posts.component.html:24</note>
+      </notes>
+      <segment>
+        <source>Author:</source>
+        <target>adasdada</target>
+      </segment>
+    </unit>
+    <unit id="1028686803160763403">
+      <notes>
+        <note category="description"> The name of the application.</note>
+        <note category="meaning">application name </note>
+        <note category="location">app/elements/menu/menu.component.html:2,3</note>
+      </notes>
+      <segment>
+        <source>My
+    Blog</source>
+    <target>Bonjour dqer</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>
