@@ -1,26 +1,43 @@
 <div class="row">
   <div class="col-md-8">
-    <div class="card" style="margin-left:10px;width:100%;">
-      <img class="card-img-top img-cover" src="../../assets/img/pic.jpg" alt="Card image cap"
-      height="20%" >
+    <div class="card" style="margin-left:10px;width:100%;" (mouseover)="counter=true">
+      <!-- <div class="
+      card {{hover?'blurbg' :''}}" style=" margin-left:10px;width:100%;" (mouseover)="loggedInUserId == user?.id ?hover=true :hover=false"
+      (mouseleave)="hover=false"> -->
+      <!-- <button class="btn btn-defult btn-on-image" style="width:5%" *ngIf="hover"><i style="font-size: 60px; filter:none;"
+          class="fa fa-edit"></i></button> -->
+      <img class="card-img-top img-cover" src="../../assets/img/pic.jpg" alt="Card image cap" height="20%">
       <img class="card-img-top img-thumbnail" src="../../assets/img/pic.jpg" alt="Card image cap">
       <div class="card-body custom-card">
         <div class="row head-name-follow">
-          <div class="col-md-6">
-            <h5  class="card-title user-name">{{user?.name}}</h5>
+          <div class="col-md-4"></div>
+          <div class="col-md-4 col-sm-6">
+            <h5 class=" card-title name">{{user?.name}}</h5><br>
           </div>
-          <div class="col-md-6" *ngIf="loggedInUserId == user?.id">
-            <span style="font-size:20px;padding-right: 10px">Edit </span>
-            <span class="fa fa-edit" aria-hidden="true" style="font-size:20px;"></span>
+          <div class="col-md-4 col-sm-6">
+            <button *ngIf="loggedInUserId != user?.id" (click)="follow(user?.id)" class="btn btn-primary follow-btn">{{follower===
+              1
+              ?"UnFollow":"Follow"}}</button>
           </div>
-          <div class="col-md-6" *ngIf="loggedInUserId != user?.id ">
-            <button  (click)="follow(user?.id)" class="btn btn-primary follow-btn">{{follower=== 1 ?"UnFollow":"Follow"}}</button>
+          <h6 class="card-title name username " style="border: solid red 1px;">
+            {{user?.authorName}}
+          </h6>
+          <p class="card-title name username profession">{{user?.profession}}</p>
+          <div class="col-xs-4 center follower-following-posts-row" style="border: solid red 1px;margin-left:4%">
+            <h4>Posts</h4>
+            <p class=" username points">{{totalPosts}}</p>
+          </div>
+          <div class="col-xs-6 center follower-following-posts-row" style="border: solid red 1px;margin-left:1%">
+            <h4>Followers</h4>
+            <!-- <p class="username points">{{counter ===true ? 10000 :101010}}</p> -->
+          </div>
+          <div class="col-xs-6 center follower-following-posts-row" style="border: solid red 1px;margin-left:1% ">
+            <h4>Following</h4>
+            <p class="username points"></p>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="col-md-4" *ngIf="loggedInUserId == user?.id">
+      <div class="col-md-12 follow-following-list" *ngIf="loggedInUserId == user?.id">
         <ul class="nav nav-tabs">
           <li class="nav-item">
             <a class="nav-link active" (click)="getFollowers()">Followers</a>
@@ -32,9 +49,9 @@
         <div style="border:none">
           <div *ngIf="showFollowers === true">
             <ul class="list-group" *ngFor="let follower of myFollowers">
-              <li  class="list-group-item " style="border-top:none">
-                <a routerLink="../users/{{follower?.id}}">
-                  <span style="font-size: 16px;">{{follower.author_name}}</span>
+              <li class="list-group-item " style="border-top:none">
+                <a class="a-names" routerLink="../users/{{follower?.id}}">
+                  <span class="names">{{follower.author_name}}</span>
                 </a>
               </li>
             </ul>
@@ -42,11 +59,15 @@
           <div *ngIf="showFollowing === true">
             <ul class="list-group" *ngFor="let following of followingTo">
               <li class="list-group-item">
-                <a routerLink="../users/{{following?.id}}">
-                  <span style="font-size: 16px;">{{following.authorName}}</span>
+                <a class="a-names" routerLink="../users/{{following?.id}}">
+                  <span class="names">{{following.authorName}}</span>
                 </a>
               </li>
-          </ul>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
+
+  </div>
 </div>

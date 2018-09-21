@@ -1,0 +1,32 @@
+.tiker-title{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 100;
+}
+
+
+.pull-up{
+    -webkit-box-shadow: 1px 1px 7px rgba(0,0,0,0.4);
+  box-shadow: 1px 1px 7px rgba(0,0,0,0.4);
+
+  /* -webkit-transition: top 0.3s ease, left 0.3s ease; */
+}
+.card-up{
+    top:5px;
+    position: relative;
+     z-index:105;
+    bottom:5px;
+    /* padding-bottom:60px; */
+    min-height:75px;
+     box-shadow: 1px 1px 20px rgba(0,0,0,0.4);
+}
+.pull-up :hover{
+    z-index: 100;
+    transition: 900ms;
+    transform: scale(1.04);
+    /* transition: ease-in; */
+    /* transition-delay: 100ms; */
+    transition-duration: 700ms;
+    /* -webkit-box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.479); */
+    /* box-shadow: 1px 1px 7px rgba(0,0,0,0.4); */
+}

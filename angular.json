@@ -30,6 +30,12 @@
             "scripts": []
           },
           "configurations": {
+            "fr": {
+              "aot": true,
+              "i18nFile": "src/locale/messages.fr.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "fr"
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -57,6 +63,9 @@
           "configurations": {
             "production": {
               "browserTarget": "myBlog:build:production"
+            },
+            "fr": {
+              "browserTarget": "myBlog:build:fr"
             }
           }
         },

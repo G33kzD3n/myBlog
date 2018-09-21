@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
@@ -13,7 +13,12 @@ import { StorecommentComponent } from './storecomment/storecomment.component';
 import { PostTikersComponent } from './post-tikers/post-tikers.component';
 import { ActivityTikerComponent } from './activity-tiker/activity-tiker.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import localeFrExtra from '@angular/common/locales/extra/fr';
+import { RegistrationComponent } from './registration/registration.component';
 
+registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
   declarations: [
@@ -26,7 +31,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     StorecommentComponent,
     PostTikersComponent,
     ActivityTikerComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    RegistrationComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -35,7 +42,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers:[],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

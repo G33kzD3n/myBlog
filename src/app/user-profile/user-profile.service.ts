@@ -9,8 +9,8 @@ export class UserProfileService {
 
   constructor(public http: HttpClient) { }
 
-  getProfile(userId:number): Observable<any>{
+  getProfile(userId: number): Observable<any> {
     let loggedInUserId = localStorage.getItem('userId');
-    return this.http.get('http://localhost:9100/users/show/' + userId + '?isfollower=' + loggedInUserId);
+    return this.http.get('http://localhost:9100/users/show/' + userId + '?isfollowedby=' + loggedInUserId);
   }
 }
