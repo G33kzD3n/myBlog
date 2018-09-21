@@ -6,7 +6,6 @@ import { PostDetailService } from '../post-detail/post-detail.service';
 
 
 
-
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',

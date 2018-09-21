@@ -16,8 +16,8 @@
           </div>
           <div class="col-md-4 col-sm-6">
             <button *ngIf="loggedInUserId != user?.id" (click)="follow(user?.id)" class="btn btn-primary follow-btn">{{follower===
-              1
-              ?"UnFollow":"Follow"}}</button>
+              1 ?"UnFollow":"Follow"}}
+            </button>
           </div>
           <h6 class="card-title name username " style="border: solid red 1px;">
             {{user?.authorName}}

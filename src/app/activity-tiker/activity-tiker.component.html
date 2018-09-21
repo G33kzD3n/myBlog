@@ -11,27 +11,24 @@
           {{activity.type==="like"? "Post ":""}}
         </a>
         <span *ngIf="activity.type === 'like'" class="text-muted" style="font-size:12px">
-          At{{
-          activity.updated_at | date:" hh:mm
-          a"}}</span>
+          At{{ activity.updated_at | date:" hh:mm a"}}
+        </span>
         <a style="color:black" *ngIf="activity.type === 'post' " routerLink="../users/{{activity.user_id}}">{{activity.author_name}}</a>
         {{activity.type ==="post" ?' published a ':""}}
         <a *ngIf="activity.type === 'post'" routerLink="{{activity.post_id}}">{{activity.type==="post"? "Post ":""}}</a>
-        <span *ngIf="activity.type === 'post'" class="text-muted" style="font-size:12px">At
-          {{
-          activity.updated_at | date:" hh:mm
-          a"}}</span>
+        <span *ngIf="activity.type === 'post'" class="text-muted" style="font-size:12px">At {{ activity.updated_at | date:"
+          hh:mm a"}}
+        </span>
         <a *ngIf="activity.type === 'comment'" routerLink="../users/{{activity.user_id}}">{{activity.author_name}}</a>
         {{activity.type === "comment" ? "commented on post " :""}}
         <a routerLink="{{activity.post_id}}">
-          {{activity.type === "comment" ? "Post " :""}}</a><span *ngIf="activity.type === 'comment'" class="text-muted"
-          style="font-size:12px">At{{activity.updated_at | date:" hh:mm
-          a"}}</span>
+          {{activity.type === "comment" ? "Post " :""}}</a><span *ngIf="activity.type === 'comment'" class="text-muted" style="font-size:12px">At{{activity.updated_at
+          | date:" hh:mm a"}}
+        </span>
         <a style="color:black" *ngIf="activity.type === 'follower' " routerLink="../users/{{activity.user_id}}">
           {{activity.body}}
         </a>{{activity.type==="follower" ? 'followed you ' :""}}<span *ngIf="activity.type === 'follower'" class="text-muted"
-          style="font-size:12px">At
-          {{ activity.updated_at | date:" hh:mm "}}</span>
+          style="font-size:12px">At {{ activity.updated_at | date:" hh:mm "}}</span>
       </p>
     </div>
   </div>

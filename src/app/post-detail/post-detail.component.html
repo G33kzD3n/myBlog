@@ -23,8 +23,7 @@
             <b>{{post[0]?.user.username}}</b>({{post[0]?.user.name}})
           </p>
           <p class="card-text " id="date">
-            <small class="text-muted">Last updated
-              {{post[0]?.updatedAt.date | date:"MMM dd yyyy 'at' hh:mm a" }}
+            <small class="text-muted">Last updated {{post[0]?.updatedAt.date | date:"MMM dd yyyy 'at' hh:mm a" }}
             </small>
           </p>
           <span style="float:left">{{post.total_likes}}<i *ngIf="loggedIn === true" class="fa fa-thumbs-up" (click)="like(post[0].id)"
