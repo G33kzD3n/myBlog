@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfileService } from './user-profile.service';
 import { FollowerService } from '../posts/service/follower.service';
 
@@ -18,32 +18,62 @@ export class UserProfileComponent implements OnInit {
   follow_btn_name: string = "Follow";
   showFollowers: Boolean = true;
   showFollowing: Boolean = false;
-  totalPosts = 400;
-  ctr: any;
-  constructor(public ar: ActivatedRoute, private profileService: UserProfileService, public followerService: FollowerService) { }
+  activity = {
+    posts: 0,
+    followers: 0,
+    following: 0
+  };
+  interval: any;
+  paramStatus = "";
+  constructor(public ar: ActivatedRoute, private profileService: UserProfileService, public followerService: FollowerService, public router: Router) {
+    this.ar.queryParams.subscribe(
+      param => {
+        if ('otheruser' == param.status) {
+          this.paramStatus = 'otheruser';
+          this.loadOtherUserProfile(this.ar.snapshot.params.id);
+        }
+      }
+    );
+  }
 
   ngOnInit() {
+    const routeParams = this.ar.snapshot.params;
     if (localStorage.getItem('userId')) {
       this.loggedInUserId = localStorage.getItem('userId');
       this.loggedIn == true;
     }
-    const routeParams = this.ar.snapshot.params;
     this.showProfile(routeParams.id);
-
+    if (routeParams.id == this.loggedInUserId) {
+      this.counter(null);
+    } else {
+      this.counter(routeParams.id);
+    }
   }
 
   showProfile(userId: number) {
-    console.log("from profile" + userId);
     this.profileService.getProfile(userId)
       .subscribe(
         res => {
-          console.log('data recioeved');
-          console.log(res);
           this.follower = res.follower;
           this.user = res.user[0];
           this.getFollowers();
         }, err => {
           console.log(err);
+        }
+      );
+  }
+  showActivity(userId = null) {
+    // console.log("other user id " + userId);
+    this.profileService.getActivity(userId)
+      .subscribe(
+        res => {
+          this.activity = res.activity;
+          clearInterval(this.interval);
+        }, err => {
+          console.log(err);
+        },
+        () => {
+          //clearInterval();
         }
       );
   }
@@ -85,5 +115,37 @@ export class UserProfileComponent implements OnInit {
         error => {
         }
       );
+  }
+
+  counter(userId: any) {
+    if (userId == null) {
+      this.interval = setInterval(() => {
+        this.activity.posts += 1;
+        this.activity.following += 1;
+        this.activity.followers += 1;
+      }, 100);
+      setTimeout(() => {
+        this.showActivity();
+      }, 3000);
+    } else {
+      this.interval = setInterval(() => {
+        this.activity.posts += 1;
+        this.activity.following += 1;
+        this.activity.followers += 1;
+      }, 100);
+      setTimeout(() => {
+        this.showActivity(userId);
+      }, 3000);
+    }
+  }
+
+  loadOtherUserProfile(id: number) {
+    if (this.paramStatus == 'otheruser') {
+      this.paramStatus = null;
+      console.log('user was ' + id);
+      this.showProfile(id)
+      this.showActivity(id);
+      // this.router.navigate(['users/' + id]);
+    }
   }
 }

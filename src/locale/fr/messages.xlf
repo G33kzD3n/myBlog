@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="fr" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="author" datatype="html">
+        <source>Author:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/posts/posts.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/post-detail/post-detail.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="lastupdated" datatype="html">
+        <source>
+                Last updated <x id="INTERPOLATION" equiv-text="{{ post[0].updatedAt.date | date:&quot;MMM dd yyyy &apos;at&apos; hh:mm a&quot;}}"/>
+              </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/posts/posts.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/post-detail/post-detail.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ec41614ae4797f73301ae79e7c75b4a31f89f3c0" datatype="html">
+        <source>Enter the title here.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/post/post.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="797772dce88e94064c31548d40f845e12809eb52" datatype="html">
+        <source>Publish
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/post/post.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <note priority="1" from="description"> The publish button in create post page</note>
+        <note priority="1" from="meaning">Button </note>
+      </trans-unit>
+      <trans-unit id="dd2b6a2f707c33bbbae858f84c22d8f306527636" datatype="html">
+        <source>
+    My Blog
+  </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <note priority="1" from="description"> The name of the application in menu.</note>
+        <note priority="1" from="meaning">application name </note>
+      </trans-unit>
+      <trans-unit id="a2afa0c98e277aae77cc3c1655b15e00a08fe585" datatype="html">
+        <source>Home
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>(current)<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description"> The link for home page in menu</note>
+        <note priority="1" from="meaning">Home link </note>
+      </trans-unit>
+      <trans-unit id="f6c5055f8225ccd6c0cc6b44d68f315f1ecac1f6" datatype="html">
+        <source>
+          New Post</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <note priority="1" from="description"> The link for new post in menu</note>
+        <note priority="1" from="meaning">New Post link </note>
+      </trans-unit>
+      <trans-unit id="cc256a5091bd78180efb21febb8779777f7b012a" datatype="html">
+        <source>My Posts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <note priority="1" from="description"> The link my posts in menu</note>
+        <note priority="1" from="meaning">My Posts link </note>
+      </trans-unit>
+      <trans-unit id="9ea7645feb678df4c7b177722f65010fbdcc0b25" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{username}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <note priority="1" from="description"> Link for profile in menu</note>
+        <note priority="1" from="meaning">Username link </note>
+      </trans-unit>
+      <trans-unit id="a06ff35e1cc7bed2709d5a6ea0a443fd7c0b6a32" datatype="html">
+        <source>Logout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <note priority="1" from="description"> The logout link in menu</note>
+        <note priority="1" from="meaning">Logout link </note>
+      </trans-unit>
+      <trans-unit id="517ca3f4a515a87ab4ebcbd5b30717926d8de8f1" datatype="html">
+        <source>Register</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <note priority="1" from="description"> The Registration page link in menu</note>
+        <note priority="1" from="meaning">Registration link </note>
+      </trans-unit>
+      <trans-unit id="f61fa89ea0b68be97a48ebaec8463158789ef62f" datatype="html">
+        <source>Enter username to login </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="102a41540feb186968741471446803b698f11990" datatype="html">
+        <source>
+          Login</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <note priority="1" from="description">Logout button in menu</note>
+        <note priority="1" from="meaning">logout button</note>
+      </trans-unit>
+      <trans-unit id="69e8d0b35b4f4de23b2b7c3f2475d0523757c66a" datatype="html">
+        <source>Top 20 Tikers</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/activity-tiker/activity-tiker.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <note priority="1" from="description">The title text inisde the activity tiker</note>
+        <note priority="1" from="meaning">Title text </note>
+      </trans-unit>
+      <trans-unit id="2515db1c9f5e571986e7ba32857f3889f53288b0" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{activity.type===&quot;like&quot; ? &apos;Liked the &apos;:&quot;&quot;}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/activity-tiker/activity-tiker.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="at" datatype="html">
+        <source>
+          At<x id="INTERPOLATION" equiv-text="{{ activity.updated_at | date:&quot; hh:mm a&quot;}}"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/activity-tiker/activity-tiker.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

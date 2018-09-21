@@ -3,9 +3,6 @@
     <div *ngIf="message != null" class="alert alert-warning alert-dismissible show" role="alert">
       <strong>Holy guacamole!</strong>{{message}}
     </div>
-    <!-- <div *ngIf="message != null" class="alert alert-success alert-dismissible show" role="alert">
-      <strong>Holy guacamole!</strong>{{message}}
-    </div> -->
     <div class="card-deck" style="margin-left:5px; border-right:solid rgba(167, 166, 166, 0.788) 5px ; width:100%; padding-right:10px;margin-right:0px; overflow-y:scroll; height:600px">
       <div class="row" *ngFor="let post of posts; let i=index">
         <div class="col-md-4 col-sm-4 col-xs-4 ">
@@ -15,17 +12,17 @@
         <div class="col-md-8 col-sm-8 col-xs-8 card-body-custom">
           <div class="card-body">
             <a routerLink="{{post[0].id}}">
-              <h2 class="a-title" style="font-size:10px; text-align:justify; font-family: 'Montserrat', sans-serif;" class="card-title"
-                style="text-align:center;"><strong>
+              <h2 class="a-title" style="font-size:10px; text-align:justify; font-family: 'Montserrat', sans-serif;"
+                class="card-title" style="text-align:center;"><strong>
                   {{post[0].title}}</strong>
               </h2>
             </a>
             <p style="font-family: 'Acme', sans-serif; letter-spacing:1px; margin-bottom:0px; padding-bottom:5px;">
-              <small class="text-muted" i18n="author name | The name of author">Author:</small>
+              <small class="text-muted" i18n="@@author">Author:</small>
               <b>
                 <a routerLink="../users/{{post[0].user.id}}">{{post[0].user.name}}</a>
               </b> ({{post[0].user.authorName}})<br>
-              <small class="text-muted">
+              <small class="text-muted" i18n="@@lastupdated" i18n="last updated | The text for last updated">
                 Last updated {{ post[0].updatedAt.date | date:"MMM dd yyyy 'at' hh:mm a"}}
               </small><br>
             </p>

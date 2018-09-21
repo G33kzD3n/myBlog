@@ -32,7 +32,7 @@
           "configurations": {
             "fr": {
               "aot": true,
-              "i18nFile": "src/locale/messages.fr.xlf",
+              "i18nFile": "src/locale/fr/messages.fr.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "fr"
             },

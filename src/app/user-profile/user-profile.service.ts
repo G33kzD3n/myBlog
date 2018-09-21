@@ -13,4 +13,14 @@ export class UserProfileService {
     let loggedInUserId = localStorage.getItem('userId');
     return this.http.get('http://localhost:9100/users/show/' + userId + '?isfollowedby=' + loggedInUserId);
   }
+  getActivity(userId = null): Observable<any> {
+    let loggedInUserId = localStorage.getItem('userId');
+    if (userId == null) {
+      return this.http.get('http://localhost:9100/users/activity/' + loggedInUserId);
+    } else {
+      return this.http.get('http://localhost:9100/users/activity/' + userId);
+    }
+
+  }
 }
+

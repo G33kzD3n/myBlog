@@ -1,39 +1,43 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink="posts" routerLinkActive="active" i18n="application name | The name of the application.">My
-    Blog
+  <a class="navbar-brand" routerLink="posts" routerLinkActive="active" i18n="application name | The name of the application in menu.">
+    My Blog
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="posts" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" routerLink="posts" routerLinkActive="active" i18n="Home link | The link for home page in menu">Home
+          <span class="
+          sr-only">(current)</span></a>
       </li>
       <li class="nav-item" *ngIf="loggedIn === true">
-        <a class="nav-link" routerLink="posts/create" routerLinkActive="active">New Post</a>
+        <a class="nav-link" routerLink="posts/create" routerLinkActive="active" i18n="New Post link | The link for new post in menu">
+          New Post</a>
       </li>
-      <li class="nav-item" *ngIf="loggedIn === true">
-        <a class="nav-link" routerLink="posts">My Posts</a>
+      <li class="
+          nav-item" *ngIf="loggedIn === true">
+        <a class="nav-link" routerLink="posts" i18n="My Posts link | The link my posts in menu">My Posts</a>
       </li>
     </ul>
     <div *ngIf="loggedIn === true">
-      <a class="nav-link pull-right" (click)="showProfile()" style="cursor: pointer;"><strong>{{username}}</strong></a>
+      <a class="nav-link pull-right" (click)="showProfile()" style="cursor: pointer;"><strong i18n="Username link | Link for profile in menu">{{username}}</strong></a>
     </div>
     <div *ngIf="loggedIn === true">
-      <a class="nav-link pull-right" id="logout" (click)="logout()">Logout</a>
+      <a class="nav-link pull-right" id="logout" (click)="logout()" i18n="Logout link | The logout link in menu">Logout</a>
     </div>
     <div *ngIf="loggedIn === false">
       <form class="form-inline my-2 my-lg-0" [formGroup]="loginForm" (ngSubmit)="attemptLogin(loginForm)">
-        <a class="form-inline" id="register" (click)="register()">Register</a>
-        <input class="form-control mr-sm-2" formControlName="username" type="search" placeholder="Enter username to login" aria-label="Name"
-          name="username">
+        <a class="form-inline" id="register" (click)="register()" i18n="Registration link | The Registration page link in menu">Register</a>
+        <input class="form-control mr-sm-2" formControlName="username" type="search" i18n-placeholder placeholder="Enter username to login "
+          aria-label="Name" name="username">
         <div *ngIf="loginForm.controls['username'].hasError('Incorrect')">
           *Incorrect username
         </div>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" [disabled]="!loginForm.valid">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" [disabled]="!loginForm.valid" i18n="logout button|Logout button in menu">
           Login</button>
 
       </form>
