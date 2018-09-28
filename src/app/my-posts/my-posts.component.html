@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-9 col-sm-9 col-xs-9">
+    <div *ngIf="message != null" class="alert alert-warning alert-dismissible show" role="alert">
+      <strong>Holy guacamole!</strong>{{message}}
+    </div>
+    <div class="card-deck" style="margin-left:5px; border-right:solid rgba(167, 166, 166, 0.788) 5px ; width:100%; padding-right:10px;margin-right:0px; overflow-y:scroll; height:600px">
+      <div class="row" *ngFor="let post of posts; let i=index">
+        <div class="col-md-4 col-sm-4 col-xs-4 ">
+          <img *ngIf="post[0].picture != null" style="margin-top:10px; margin-right:0px;max-width:90%; min-width:90% ; max-height:250px; min-height:300px"
+            id="card-img" src="{{basePath}}{{post[0].picture}}" alt="Card image cap">
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-8 card-body-custom">
+          <div class="card-body">
+            <a href="/posts" routerLink="/posts/{{post[0].id}}">
+              <h2 class="a-title" style="font-size:10px; text-align:justify; font-family: 'Montserrat', sans-serif;"
+                class="card-title" style="text-align:center;"><strong>
+                  {{post[0].title}}</strong>
+              </h2>
+            </a>
+            <p style="font-family: 'Acme', sans-serif; letter-spacing:1px; margin-bottom:0px; padding-bottom:5px;">
+              <small class="text-muted" i18n="@@author">Author:</small>
+              <b>
+                <a routerLink="/users/{{post[0].user.id}}">{{post[0].user.name}}</a>
+              </b> ({{post[0].user.authorName}})<br>
+              <small class="text-muted" i18n="@@lastupdated" i18n="last updated | The text for last updated">
+                Last updated {{ post[0].updatedAt.date | date:"MMM dd yyyy 'at' hh:mm a"}}
+              </small><br>
+            </p>
+            <p class="card-text" style="width:100%;position:relative;
+              text-align:justify; font-family: 'Montserrat', sans-serif">
+              {{ post[0].body.substring(1,300)}} <Strong><a data-toggle="tooltip " title="Click to view full post" href="/"
+                  routerLink="/posts/{{post[0].id}}">.....</a></Strong>
+            </p>
+            <span style="cursor: pointer;float:left; font-size: 15px;" class="badge">Likes {{post.total_likes}}
+              <!-- <i *ngIf="loggedIn===true" (click)="like(i)" class="fa fa-thumbs-up" style="padding-left:5px;font-size:25px;"></i> -->
+            </span>
+          </div>
+        </div>
+        <hr class="style-three" style="position:relative; width: 100%; margin-top:0px;">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-3 col-xs-3" style="height :600px; padding-left:0px">
+    <app-activity-tiker *ngIf="loggedIn === true"></app-activity-tiker>
+  </div>
+</div>

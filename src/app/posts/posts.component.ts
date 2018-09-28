@@ -45,13 +45,21 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.refreshComponent();
+    console.log("loaded posts");
+    this.ar.params.subscribe(
+      (params) => {
+        if (params.id) {
+          this.router.navigate(['/posts/' + params.id]);
+          console.log("----------" + params);
+        }
+      });
     this.username = "";
     if (localStorage.getItem('username')) {
       this.loggedIn = true;
       this.username = localStorage.getItem('username');
     }
     this.loadPosts();
+    this.refreshComponent();
   }
 
   loadPosts() {

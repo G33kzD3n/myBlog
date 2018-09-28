@@ -13,11 +13,15 @@ export class MenuComponent implements OnInit {
   public username: string = "";
   loginForm: FormGroup;
   paramStatus = "";
+  userId: any;
   constructor(public router: Router, public fb: FormBuilder, public loginService: LoginService, public ar: ActivatedRoute) {
     this.ar.queryParams.subscribe(
       (param) => {
         if ('newuser' == param.status) {
           this.paramStatus = 'newuser';
+          this.ngOnInit();
+        }
+        if (param.id == this.userId) {
           this.ngOnInit();
         }
       });
@@ -30,15 +34,10 @@ export class MenuComponent implements OnInit {
 
     const status = this.ar.snapshot.queryParamMap.has('status');
     console.log("query params where " + status);
-    // this.router.onSameUrlNavigation;
-    // this.router.navigate(['posts']);
-
-
-    //console.log(localStorage.getItem('username'));
     if (localStorage.getItem('username')) {
       this.loggedIn = true;
       this.username = localStorage.getItem('username');
-      this.router.navigate(['posts']);
+      this.userId = localStorage.getItem('userId');
     }
   }
 
@@ -73,8 +72,8 @@ export class MenuComponent implements OnInit {
       this.paramStatus = '';
     }
   }
-  showProfile() {
-    let id = localStorage.getItem('userId');
-    this.router.navigate(['users/' + id]);
+  myPosts() {
+    let userId = localStorage.getItem('userId');
+    this.router.navigate(['users/' + userId + '/posts']);
   }
 }

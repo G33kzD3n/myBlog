@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink="posts" routerLinkActive="active" i18n="application name | The name of the application in menu.">
+  <a class="navbar-brand" routerLink="/posts" routerLinkActive="active" i18n="application name | The name of the application in menu.">
     My Blog
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -10,21 +10,22 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="posts" routerLinkActive="active" i18n="Home link | The link for home page in menu">Home
+        <a class="nav-link" routerLink="/posts" routerLinkActive="active" i18n="Home link | The link for home page in menu">Home
           <span class="
           sr-only">(current)</span></a>
       </li>
       <li class="nav-item" *ngIf="loggedIn === true">
-        <a class="nav-link" routerLink="posts/create" routerLinkActive="active" i18n="New Post link | The link for new post in menu">
+        <a class="nav-link" routerLink="/posts/create" routerLinkActive="active" i18n="New Post link | The link for new post in menu">
           New Post</a>
       </li>
-      <li class="
-          nav-item" *ngIf="loggedIn === true">
-        <a class="nav-link" routerLink="posts" i18n="My Posts link | The link my posts in menu">My Posts</a>
+      <li class="nav-item" *ngIf="loggedIn === true">
+        <a style="cursor: pointer;" class="nav-link" (click)="myPosts()" i18n="My Posts link | The link my posts in menu">My
+          Posts</a>
       </li>
     </ul>
     <div *ngIf="loggedIn === true">
-      <a class="nav-link pull-right" (click)="showProfile()" style="cursor: pointer;"><strong i18n="Username link | Link for profile in menu">{{username}}</strong></a>
+      <a class="nav-link pull-right" style="cursor: pointer;"><strong i18n="Username link | Link for profile in menu"
+          routerLink="/users/{{userId}}">{{username}}</strong></a>
     </div>
     <div *ngIf="loggedIn === true">
       <a class="nav-link pull-right" id="logout" (click)="logout()" i18n="Logout link | The logout link in menu">Logout</a>

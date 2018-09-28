@@ -17,6 +17,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import localeFrExtra from '@angular/common/locales/extra/fr';
 import { RegistrationComponent } from './registration/registration.component';
+import { MyPostsComponent } from './my-posts/my-posts.component';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
@@ -33,6 +34,7 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     ActivityTikerComponent,
     UserProfileComponent,
     RegistrationComponent,
+    MyPostsComponent,
 
   ],
   imports: [

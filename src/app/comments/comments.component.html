@@ -16,11 +16,12 @@
       <span style="font-family: 'Montserrat', sans-serif;" data-canedit="true" class="comment-message">
         {{comment.body}}
       </span>
-      <i *ngIf="username === comment.user.authorName" (click)="editComment(comment.body, comment.id)" class="fa fa-pencil" style="padding-left:5px">
+      <i *ngIf="username === comment.user.authorName" (click)="editComment(comment.body, comment.id)" class="fa fa-pencil"
+        style="padding-left:5px">
       </i>
     </blockquote>
   </div>
-  <a  (click)="loadPreviousComments(next)" style="text-decoration-line: underline; color:blue;">view previous
+  <a (click)="loadPreviousComments(next)" style="text-decoration-line: underline; color:blue;">view previous
     comments</a>
 </div>
 <div class="row">
@@ -42,7 +43,7 @@
       <div class="errorBox" *ngIf="commentForm.controls['body'].hasError('minlength') && commentForm.controls['body'].touched">
         *Body must be more than 5.
       </div>
-      <button class="btn btn-primary" id="publish-btn" [disabled]="!commentForm.valid" type="submit">Publish
+      <button style="cursor: pointer" class="btn btn-primary" id="publish-btn" [disabled]="!commentForm.valid" type="submit">Publish
       </button>
     </form>
   </div>

@@ -34,7 +34,11 @@
     margin-top:30px;
     width:30%;
 }
-
+.edit-icon{
+    font-size: 16px;
+    cursor: pointer;
+    padding:10px;
+}
 .name{
     width:100%;
      padding-top:0px;
@@ -98,4 +102,17 @@ ul .a-names :hover{
      transition-delay: 100ms;
     transform: scale(1.2);
 
+}
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+.errorBox{
+    color : red;
+    font-weight: 200px;
+    font-size: 16px;
+    margin:2px;
+    float: left;
 }

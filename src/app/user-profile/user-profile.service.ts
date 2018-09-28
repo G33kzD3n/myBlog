@@ -22,5 +22,9 @@ export class UserProfileService {
     }
 
   }
+  editProfile(payload): Observable<any> {
+    let userId = localStorage.getItem('userId');
+    return this.http.post('http://localhost:9100/users/edit/' + userId, payload);
+  }
 }
 

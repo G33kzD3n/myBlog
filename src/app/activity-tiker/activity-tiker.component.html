@@ -4,32 +4,32 @@
     <div class=" card-body">
       <img src="../../assets/img/pic.jpg" width="40px;" style="margin-left:0px;margin-right:5px;border-radius:90%; height:40px; float:left">
       <p style="margin-top:5px; text-align: justify; padding-left:10px; color:black; font-family: 'Montserrat', sans-serif; font-size:14px; font-weight: 200">
-        <a style="color:black" *ngIf="activity.type==='like'" routerLink=" ../users/{{activity.user_id}}">
+        <a style="color:black" *ngIf="activity.type==='like'" routerLink="/users/{{activity.user_id}}">
           {{activity.author_name}}
         </a>
         <ng-container i18n>{{activity.type==="like" ? 'Liked the ':""}}</ng-container>
-        <a routerLink="{{activity.post_id}}">
+        <a routerLink="/posts/{{activity.post_id}}">
           {{activity.type==="like"? "Post ":""}}
         </a>
         <span *ngIf="activity.type === 'like'" class="text-muted" style="font-size:12px" i18n="@@at">
           At{{ activity.updated_at | date:" hh:mm a"}}
         </span>
-        <a style="color:black" *ngIf="activity.type === 'post' " routerLink="../users/{{activity.user_id}}">{{activity.author_name}}</a>
+        <a style="color:black" *ngIf="activity.type === 'post' " routerLink="/users/{{activity.user_id}}">{{activity.author_name}}</a>
         {{activity.type ==="post" ?' published a ':""}}
-        <a *ngIf="activity.type === 'post'" routerLink="{{activity.post_id}}">{{activity.type==="post"?
+        <a *ngIf="activity.type === 'post'" routerLink="/posts/{{activity.post_id}}">{{activity.type==="post"?
           "Post ":""}}</a>
         <span *ngIf="activity.type === 'post'" class="text-muted" style="font-size:12px">At {{ activity.updated_at |
           date:"
           hh:mm a"}}
         </span>
-        <a *ngIf="activity.type === 'comment'" routerLink="../users/{{activity.user_id}}">{{activity.author_name}}</a>
+        <a *ngIf="activity.type === 'comment'" routerLink="/users/{{activity.user_id}}">{{activity.author_name}}</a>
         {{activity.type === "comment" ? "commented on post " :""}}
-        <a routerLink="{{activity.post_id}}">
+        <a routerLink="/posts/{{activity.post_id}}">
           {{activity.type === "comment" ? "Post " :""}}</a><span *ngIf="activity.type === 'comment'" class="text-muted"
           style="font-size:12px">At{{activity.updated_at
           | date:" hh:mm a"}}
         </span>
-        <a style="color:black" *ngIf="activity.type === 'follower' " routerLink="../users/{{activity.user_id}}">
+        <a style="color:black" *ngIf="activity.type === 'follower' " routerLink="/users/{{activity.user_id}}">
           {{activity.body}}
         </a>{{activity.type==="follower" ? 'followed you ' :""}}<span *ngIf="activity.type === 'follower'" class="text-muted"
           style="font-size:12px">At {{ activity.updated_at | date:" hh:mm "}}</span>
@@ -42,7 +42,7 @@
   <div class="stacked--fan-left" *ngFor="let activity of activities">
     <a style="color:black">
       <h6 class="card-title tiker-title" style="margin-top:5px; text-align: justify; padding-left:10px;"><strong>
-          <a *ngIf="activity.type==='like'" routerLink=" ../users/{{activity.user_id}}">{{activity.author_name}}
+          <a *ngIf="activity.type==='like'" routerLink="/users/{{activity.user_id}}">{{activity.author_name}}
           </a>
           {{activity.type==="like" ? 'Liked the ':""}} <a routerLink="{{activity.post_id}}">
             {{activity.type==="like"? "Post ":""}}
@@ -51,7 +51,7 @@
             activity.updated_at | date:" hh:mm
             a"}}</span>
 
-          <a *ngIf="activity.type === 'post' " routerLink="../users/{{activity.user_id}}">{{activity.author_name}}</a>
+          <a *ngIf="activity.type === 'post' " routerLink="/users/{{activity.user_id}}">{{activity.author_name}}</a>
           {{activity.type ==="post" ?' published a ':""}}
           <a *ngIf="activity.type === 'post'" routerLink="{{activity.post_id}}">{{activity.type==="post"? "Post ":""}}</a>
           <span *ngIf="activity.type === 'post'" class="text-muted" style="font-size:12px">At
@@ -59,7 +59,7 @@
             activity.updated_at | date:" hh:mm
             a"}}</span>
 
-          <a *ngIf="activity.type === 'comment'" routerLink="../users/{{activity.user_id}}">{{activity.author_name}}</a>
+          <a *ngIf="activity.type === 'comment'" routerLink="/users/{{activity.user_id}}">{{activity.author_name}}</a>
           {{activity.type === "comment" ? "commented on post " :""}}
           <a routerLink="{{activity.post_id}}">
             {{activity.type === "comment" ? "Post " :""}}</a><span *ngIf="activity.type === 'comment'" class="text-muted"
@@ -68,7 +68,7 @@
             activity.updated_at | date:" hh:mm
             a"}}</span>
 
-          <a *ngIf="activity.type === 'follower' " routerLink="../users/{{activity.user_id}}">
+          <a *ngIf="activity.type === 'follower' " routerLink="/users/{{activity.user_id}}">
             {{activity.body}}
           </a>{{activity.type==="follower" ? 'followed you ' :""}}<span *ngIf="activity.type === 'follower'" class="text-muted"
             style="font-size:12px">At
