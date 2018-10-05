@@ -3,16 +3,16 @@
     <div class="card-deck " style="margin-left:5px; margin-right:10px">
       <div *ngIf="updated === true" class="alert alert-warning alert-dismissible show" role="alert">
         <strong>Holy guacamole!</strong> Post updated successfully.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="updated =false">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="card">
-        <img *ngIf="post[0].picture != null" class="card-img" id="card-img" style="max-height:700px; width:auto" src="{{basePath}}{{post[0]?.picture}}"
+        <img *ngIf="post[0]?.picture != null" class="card-img" id="card-img" style="max-height:700px; width:auto" src="{{basePath}}{{post[0]?.picture}}"
           alt="Card image cap">
         <div class="card-body">
           <h2 class="card-title"><strong>{{post[0]?.title}}</strong></h2>
-          <a *ngIf="username === post[0].user.authorName" class="btn btn-default" (click)="editPost(post[0].id)">
+          <a *ngIf="username === post[0]?.user.authorName" class="btn btn-default" (click)="editPost(post[0]?.id)">
             <span style="font-size:20px;padding-right: 10px">Edit </span>
             <span class="fa fa-edit" aria-hidden="true" style="font-size:20px;">
             </span>
@@ -27,8 +27,8 @@
               'at' hh:mm a" }}
             </small>
           </p>
-          <span style="cursor: pointer;float:left">{{post.total_likes}}<i *ngIf="loggedIn === true" class="fa fa-thumbs-up"
-              (click)="like(post[0].id)" style="padding-left:5px;font-size:25px;"></i></span>
+          <span style="cursor: pointer;float:left">{{post?.total_likes}}<i *ngIf="loggedIn === true" class="fa fa-thumbs-up"
+              (click)="like(post[0]?.id)" style="padding-left:5px;font-size:25px;"></i></span>
         </div>
       </div>
     </div>

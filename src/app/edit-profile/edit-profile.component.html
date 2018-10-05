@@ -1,0 +1,133 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="card" style="padding-right:10px;margin-left:10px;width:100%; overflow-y:scroll; height:600px; border-right:solid rgba(167, 166, 166, 0.788) 5px ; ">
+      <div class="row">
+        <div class="col-md-10">
+          <h3 style="text-align:center">Edit profile</h3>
+        </div>
+        <div class="col-md-2 pull-right">
+          <button class="btn btn-primary" style="margin:auto;text-align:right;width:90%;height:100%" (click)="redirectToViewProfile()">Back</button>
+        </div>
+      </div>
+      <hr>
+      <div style="padding:10px; margin:0px 5px 0 2px;">
+        <form [formGroup]="editProfileForm" (ngSubmit)="editProfile(editProfileForm)">
+          <div class="form-row">
+            <div class="form-group col-md-8" style=" width:80%">
+              <label for="name">Name</label>
+              <input formControlName="name" type="text" class="form-control" id="name" value="{{user?.name}}">
+              <label for="email">Email</label>
+              <input formControlName="email" type="email" class="form-control" id="email" value="{{user?.email}}">
+              <label for="profession">Works as</label>
+              <input formControlName="profession" type="text" class="form-control" id="profession" value="{{user?.profession}}">
+              <label for="profession">Works as</label>
+              <input formControlName="profession" type="text" class="form-control" id="profession" value="{{user?.profession}}">
+            </div>
+            <div class="form-group col-md-4">
+              <img data-toggle="tooltip" data-placement="top" title="Upload Profile pic" (click)="avatar.click()" src="{{basePath}}{{user?.avatar}}"
+                style=" display:inline;cursor: pointer;width:250px; border-radius: 60%; height: 250px">
+              <input style="display:none" #avatar name="avatar" type="file" (change)="uploadAvtar($event)">
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="form-group col-md-12">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radiogroup" id="privacyPublic" value="false"
+                  [checked]="user?.privacy==false" (change)="privacyValue('public')">
+                <label class="form-check-label" for="privacyPublic">Public</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radiogroup" id="privacyPublic" value="true"
+                  [checked]="user?.privacy==true" (change)="privacyValue('private')">
+                <label class="form-check-label" for="privacyPublic">Private</label>
+              </div>
+            </div>
+          </div>
+          <button type="submit" [disabled]="!editProfileForm.valid" class="btn btn-primary">Save</button>
+        </form>
+        <hr *ngIf="privacy">
+        <div class="row" *ngIf="privacy">
+          <div class=" col-md-12">
+            <h4 class="card-title ">Privacy Setting</h4>
+            <p class="card-body "> Allow Followers to view your profile.</p>
+            <div *ngIf="noFollowers && erroMessage != null" class="alert alert-warning alert-dismissible show" role="alert">
+              <strong>Holy guacamole!</strong>{{erroMessage}}.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"></span>
+              </button>
+            </div>
+            <div *ngIf="noFollowing && erroMessage != null" class="alert alert-warning alert-dismissible show" role="alert">
+              <strong>Holy guacamole!</strong>{{erroMessage}}.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="input-group col-md-6 dropdown-input">
+              <input type="text" class="form-control dropdown-input" aria-label="Text input with dropdown button">
+              <div class="input-group-append" style="padding-left:0px;">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">Dropdown</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" (click)="showAll()">All</a>
+                  <a class="dropdown-item" (click)="noFollowing ==false ? showFollowing() : showNoFollowingMessage()">Following</a>
+                  <a class="dropdown-item" (click)="noFollowers == false ?showFollowers() : showNoFollowerMessage()">Followers</a>
+                  <div role="separator" class="dropdown-divider"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="privacy">
+          <div class="col-md-6" *ngIf="privacy && hideVisiblityForm == true">
+            <div class="row" style="margin-top: 10px">
+              <p class="col-md-8">ALL Users</p>
+              <div class=" input-group col-md-4 form-check pull-right">
+                <input class="form-check-input" type="checkbox" (click)="checkAll($event)" [checked]="allowAllClicked">
+                <label class="form-check-label">
+                  Allow ALL
+                </label>
+              </div>
+            </div>
+            <form [formGroup]="visiblityForm" (ngSubmit)="updatePrivacy()">
+              <div formArrayName="visiblity">
+                <ul class="list-group" *ngFor="let vis of visiblityForm.controls.visiblity.controls; let i = index">
+                  <li class="list-group-item" [formGroupName]="i">
+                    <span class="names pull-left">{{vis.get('name').value}} is {{vis.get('is').value}}</span>
+                    <div class="form-check pull-right">
+                      <input class="form-check-input" type="checkbox" (change)="toggleCanSee(i)" [checked]="vis.get('cansee').value">
+                      <label class="form-check-label" for="following?.id">
+                        Allow
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <button class="btn btn-primary" style="margin-top:10px">Update Privacy</button>
+            </form>
+          </div>
+          <div class="col-md-6" *ngIf="privacy && hideProfileViewerForm == true">
+            <p>Can See Your Profile</p>
+            <!-- <form [formGroup]="visiblityForm">
+              <div formArrayName="profileViewer">
+                <ul class="list-group" *ngFor="let pviewer of visiblityForm.controls.profileViewer.controls; let i = index">
+                  <li class="list-group-item" [formGroupName]="i">
+                    <span class="names pull-left">{{pviewer.get('name').value}}</span>
+                    <div class="form-check pull-right">
+                      <i class="fa fa-trash" style="font-size:15px;" (click)="removeViewer(pviewer.get('id'))">
+                        Remove
+                      </i>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-3 col-xs-3" style="height :600px; padding-left:0px">
+    <app-activity-tiker></app-activity-tiker>
+  </div>
+</div>

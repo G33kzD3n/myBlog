@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Event, NavigationEnd } from '@angular/router';
 import { UserProfileService } from './user-profile.service';
 import { FollowerService } from '../posts/service/follower.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,16 +15,18 @@ export class UserProfileComponent implements OnInit {
   public avatar: any = null;
   privacy: boolean = false;
   user: any = [];
+  updated = false;
   basePath = null;
   follower = 0;
-  editMode = false;
   loggedInUserId: string = '';
   loggedIn: Boolean = false;
-  myFollowers: {} = [];
-  followingTo: {} = [];
+  myFollowers: any = [];
+  followingTo: any = [];
   follow_btn_name: string = "Follow";
   showFollowers: Boolean = true;
   showFollowing: Boolean = false;
+  viewers: any = [];
+  checked: boolean = true;
   activity = {
     posts: 0,
     followers: 0,
@@ -31,12 +34,22 @@ export class UserProfileComponent implements OnInit {
   };
   interval: any;
   paramStatus = "";
+  canSee: Boolean = false;
   constructor(public ar: ActivatedRoute, private profileService: UserProfileService, public followerService: FollowerService, public router: Router, public fb: FormBuilder) {
     this.ar.queryParams.subscribe(
       param => {
         if ('updatedprofile' == param.status) {
           this.paramStatus = 'updatedprofile';
-          this.ngOnInit();
+          this.loggedIn = true;
+          this.refreshProfile();
+        }
+        if ('updateprivacy' == param.status) {
+          this.paramStatus = 'updateprivacy';
+          this.paramStatus = null;
+          this.avatar = null;
+          this.loggedIn = true;
+          this.updated = true;
+          this.showProfile(localStorage.getItem('userId'));
         }
       }
     );
@@ -48,6 +61,7 @@ export class UserProfileComponent implements OnInit {
         }
         if (routeParam.id == localStorage.getItem('userId')) {
           this.router.navigate(['/users/' + routeParam.id]);
+          this.loggedIn = true;
           this.showProfile(routeParam.id);
         }
       }
@@ -56,40 +70,61 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-
     const routeParams = this.ar.snapshot.params;
     if (localStorage.getItem('userId')) {
       this.loggedInUserId = localStorage.getItem('userId');
       this.loggedIn == true;
+    } else {
+      this.loggedIn == false;
     }
-    this.editProfileForm = this.fb.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      profession: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      email: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-    });
   }
 
-  showProfile(userId: number) {
+  showProfile(userId) {
+    if (localStorage.getItem('userId')) {
+      this.loggedIn = true;
+    }
+
     this.profileService.getProfile(userId)
       .subscribe(
         res => {
           this.follower = res.follower;
           this.basePath = res.url_base_path;
           this.user = res.user[0];
-          //console.log(res);
+          this.privacy = this.user.privacy;
+          clearInterval(this.interval);
+
         }, err => {
           clearInterval(this.interval);
           this.router.navigate(['/posts']);
         }, () => {
           if (this.user.id == localStorage.getItem('userId')) {
+            //this.canSee = false;
+            this.getPrivacyList(userId).subscribe(
+              (res: any) => {
+                this.followingTo = res[0].following;
+                this.myFollowers = res[0].followers;
+              });
             this.counter(null);
-            this.getFollowers();
           } else {
             this.counter(this.user.id);
+            if (this.user.privacy == false) {
+              this.getPrivacyList(userId).subscribe(
+                (res: any) => {
+                  this.followingTo = res[0].following;
+                  this.myFollowers = res[0].followers;
+                });
+            } else {
+              this.getPrivacyList(userId).subscribe(
+                (res: any) => {
+                  this.followingTo = res[0].following;
+                  this.myFollowers = res[0].followers;
+                  this.setProfileVisibility(this.myFollowers, this.followingTo);
+                }, err => {
+                  console.log(err);
+                });
+            }
           }
-
-        }
-      );
+        });
   }
 
   showActivity(userId = null) {
@@ -115,38 +150,41 @@ export class UserProfileComponent implements OnInit {
         res => {
           this.follow_btn_name = "UnFollow";
           console.log(res.data);
-          this.ngOnInit();
+          this.showProfile(toBeFollowedUsersId);
         }, err => {
         }
       );
   }
-
-  getFollowers() {
-    this.showFollowers = true;
-    this.showFollowing = false;
-    this.followerService.getFollowers()
-      .subscribe(
-        (res: any) => {
-          console.log(res);
-          this.myFollowers = res.followers;
-        },
-        error => {
-        }
-      );
+  getPrivacyList(id): Observable<any> {
+    return this.followerService.getPrivacyListById(id);
   }
-  getFollowing() {
-    this.showFollowers = false;
-    this.showFollowing = true;
-    this.followerService.getFollowing()
-      .subscribe(
-        (res: any) => {
-          console.log(res.following_users);
-          this.followingTo = res.following_users;
-        },
-        error => {
-
-        }
-      );
+  setProfileVisibility(followers: any, following: any): any {
+    if (this.canFollowersSee(followers) && this.canFollowedSee(following) == false) {
+      this.canSee = false;
+    }
+    if (this.canFollowersSee(followers) || this.canFollowedSee(following == true)) {
+      this.canSee = true;
+    }
+  }
+  canFollowedSee(following: any): any {
+    if (following.some(user => {
+      return <string>user.id == localStorage.getItem('userId') && user.canSee == true;
+    })) {
+      console.log("### is present");
+      return true;
+    } else {
+      console.log("### not present");
+      return false;
+    }
+  }
+  canFollowersSee(followers: any) {
+    if (followers.some(user => {
+      return <string>user.id == localStorage.getItem('userId') && user.canSee == true;
+    })) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   counter(userId: any) {
@@ -170,48 +208,28 @@ export class UserProfileComponent implements OnInit {
       }, 1);
     }
   }
+  showFollowingUsers() {
+    this.showFollowers = false;
+    this.showFollowing = true;
+    //const routeParam = this.ar.snapshot.params.id;
 
-  privacyValue(prValue) {
-    if (prValue == 'public') {
-      this.privacy = false;
-    } else {
-      this.privacy = true;
-    }
-    console.log(prValue + this.privacy);
   }
-  uploadAvtar(event) {
-    this.avatar = event.target.files[0];
-    console.log(this.avatar);
+  showFollowerUsers() {
+    this.showFollowers = true;
+    this.showFollowing = false;
   }
+
   showEditProfileFeature() {
-    this.editMode = true;
-    this.editProfileForm.controls['name'].setValue(this.user.name);
-    this.editProfileForm.controls['profession'].setValue(this.user.profession);
-    this.editProfileForm.controls['email'].setValue(this.user.email);
+    this.router.navigate(['/users/edit/' + this.loggedInUserId]);
+  }
 
-  }
-  editProfile(form) {
-    let payload = new FormData();
-    payload.append('file', this.avatar, this.avatar != null ? this.avatar.name : null);
-    payload.append('name', form.controls['name'].value);
-    payload.append('profession', form.controls['profession'].value);
-    payload.append('email', form.controls['email'].value);
-    payload.append('privacy', this.privacy == true ? "1" : "0");
-    this.profileService.editProfile(payload)
-      .subscribe(
-        res => {
-          if (res.status == "success") {
-            this.router.navigate(['users/' + localStorage.getItem('userId')], { queryParams: { status: 'updatedprofile' } })
-          }
-        }
-      );
-  }
   refreshProfile() {
     if (this.paramStatus = "updatedprofile") {
       this.paramStatus = null;
       this.avatar = null;
-      this.editMode = false;
       this.router.navigate(['users/' + localStorage.getItem('userId')]);
+      this.showProfile(localStorage.getItem('userId'));
     }
   }
+
 }

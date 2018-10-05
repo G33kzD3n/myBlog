@@ -9,7 +9,7 @@ export class UserProfileService {
 
   constructor(public http: HttpClient) { }
 
-  getProfile(userId: number): Observable<any> {
+  getProfile(userId: any): Observable<any> {
     let loggedInUserId = localStorage.getItem('userId');
     return this.http.get('http://localhost:9100/users/show/' + userId + '?isfollowedby=' + loggedInUserId);
   }
@@ -25,6 +25,10 @@ export class UserProfileService {
   editProfile(payload): Observable<any> {
     let userId = localStorage.getItem('userId');
     return this.http.post('http://localhost:9100/users/edit/' + userId, payload);
+  }
+  updatePrivacy(payload: any): Observable<any> {
+    let userId = localStorage.getItem('userId');
+    return this.http.post('http://localhost:9100/users/updatePrivacy/' + userId, payload);
   }
 }
 

@@ -7,19 +7,25 @@ import { Observable } from 'rxjs';
 })
 export class FollowerService {
 
-  constructor(public http:HttpClient) { }
+  constructor(public http: HttpClient) { }
 
-  followToggle(toBeFollowedUsersId:number): Observable<any>{
+  followToggle(toBeFollowedUsersId: number): Observable<any> {
     let loggedInUserId = localStorage.getItem('userId');
-     return this.http.post('http://localhost:9100/users/follow/'+toBeFollowedUsersId,{userid:loggedInUserId});
+    return this.http.post('http://localhost:9100/users/follow/' + toBeFollowedUsersId, { userid: loggedInUserId });
   }
 
-  getFollowers(): Observable<any> {
-    let loggedInUserId = localStorage.getItem('userId');
-    return this.http.get('http://localhost:9100/users/followers/' + loggedInUserId);
+  getFollowers(id): Observable<any> {
+    return this.http.get('http://localhost:9100/users/followers/' + id);
   }
-  getFollowing():Observable<any>{
-    let loggedInUserId = localStorage.getItem('userId');
-    return this.http.get('http://localhost:9100/users/following/' + loggedInUserId);
+  getFollowing(id): Observable<any> {
+    return this.http.get('http://localhost:9100/users/following/' + id);
   }
+
+  getPrivacyListById(id): Observable<any> {
+    // let loggedInUserId = localStorage.getItem('userId');
+    return this.http.get('http://localhost:9100/users/privacy/' + id);
+  }
+  // getOtherUserPrivacyList(id): Observable<any> {
+  //   return this.http.get('http://localhost:9100/users/privacy/' + id);
+  // }
 }

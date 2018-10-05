@@ -1,53 +1,62 @@
 <div class="row">
   <div class="col-md-9">
-    <div class="card" *ngIf="editMode==false" style="padding-right:10px;margin-left:10px;width:100%; overflow-y:scroll; height:600px; border-right:solid rgba(167, 166, 166, 0.788) 5px ; ">
+    <!-- <div class="card-deck " style="margin-left:2px; margin-right:0px; padding-right:0px"> -->
+    <div *ngIf="updated == true" class="alert alert-warning alert-dismissible show" role="alert">
+      <strong>Holy guacamole!</strong> Profile Updated successfully.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="card" style="padding-right:10px;margin-left:10px;width:100%; overflow-y:scroll; height:600px; border-right:solid rgba(167, 166, 166, 0.788) 5px ; ">
       <img class="card-img-top img-cover" src="../../assets/img/pic.jpg" alt="Card image cap" height="20%">
       <img *ngIf="user?.avatar !=null" class=" card-img-top img-thumbnail" src="{{basePath}}{{user?.avatar}}" alt="Card image cap">
       <div class="card-body custom-card">
-        <div class="row head-name-follow">
+        <div class="row head-name-follow {{user?.avatar == null ? ' ptop':''}}">
           <div class="col-md-4"></div>
           <div class="col-md-4 col-sm-4">
-            <div class="row">
+            <div class="row ">
               <div class="col-md-4 col-sm-2"></div>
               <div class="col-md-10 col-sm-8" style="width:100%;">
-                <h5 class=" card-title name" style="text-align:right">{{user?.name}}</h5>
+                <h5 class=" card-title name" style="left:35px">{{user?.name}}</h5>
               </div>
-              <div (click)="showEditProfileFeature()" *ngIf="loggedInUserId == user?.id" class="col-md-2 col-sm-2 pull-right"
+              <div (click)="showEditProfileFeature()" *ngIf="loggedInUserId == user?.id && loggedIn" class="col-md-2 col-sm-2 pull-right"
                 style="width:100%;">
                 <i class="fa fa-edit edit-icon" style="font-size: 20px;"></i>
               </div>
             </div>
           </div>
           <div class="col-md-4 col-sm-6">
-            <button *ngIf="loggedInUserId != user?.id" (click)="follow(user?.id)" class="btn btn-primary follow-btn">{{follower===
-              1 ?"UnFollow":"Follow"}}
+            <button *ngIf="loggedInUserId != user?.id && loggedIn" (click)="follow(user?.id)" class="btn btn-primary follow-btn">{{follower
+              == 1
+              ?"UnFollow":"Follow"}}
             </button>
           </div>
           <h6 class="card-title name username ">
             {{user?.authorName}}
           </h6>
           <p class="card-title name username profession">{{user?.profession}}</p>
-          <div class="col-xs-6 center follower-following-posts-row" style="margin-left:4% ">
+          <div *ngIf="loggedIn" class="col-xs-6 center follower-following-posts-row" style="margin-left:4% ">
             <h4 style="border-top: solid 2px gray ;">Posts</h4>
             <p class=" username points">{{activity?.posts}}</p>
           </div>
-          <div class="col-xs-6 center follower-following-posts-row" style="margin-left:1%">
+          <div *ngIf="loggedIn" class="col-xs-6 center follower-following-posts-row" style="margin-left:1%">
             <h4 style="border-top: solid 2px gray ;">Followers</h4>
             <p class="username points">{{activity?.followers}}</p>
           </div>
-          <div class="col-xs-6 center follower-following-posts-row" style="margin-left:1% ">
+          <div *ngIf="loggedIn" class="col-xs-6 center follower-following-posts-row" style="margin-left:1% ">
             <h4 style="border-top: solid 2px gray ;">Following</h4>
             <p class="username points">{{activity?.following}}</p>
           </div>
         </div>
       </div>
-      <div class="col-md-12 follow-following-list" *ngIf="loggedInUserId == user?.id">
+      <div class="col-md-12 follow-following-list" *ngIf="loggedInUserId == user?.id || user?.privacy == true && canSee == true">
         <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" (click)="getFollowers()">Followers</a>
+          <li class="nav-item" *ngIf="canSee || loggedInUserId == user?.id">
+            <a class=" nav-link
+            {{showFollowers == true ? ' active' :''}}" (click)="showFollowerUsers()">Followers</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link {{showFollowing===true ?'active':''}}" (click)="getFollowing()">Following</a>
+          <li class="nav-item" *ngIf="canSee || loggedInUserId == user?.id ">
+            <a class="nav-link {{showFollowing==true ?' active':''}}" (click)="showFollowingUsers()">Following</a>
           </li>
         </ul>
         <div style="border:none">
@@ -55,7 +64,7 @@
             <ul class="list-group" *ngFor="let follower of myFollowers">
               <li class="list-group-item " style="border-top:none">
                 <a class="a-names" routerLink="/users/{{follower?.id}}">
-                  <span class="names">{{follower.author_name}}</span>
+                  <span class="names">{{follower.authorName}}</span>
                 </a>
               </li>
             </ul>
@@ -72,55 +81,8 @@
         </div>
       </div>
     </div>
-    <div class="card" *ngIf="editMode" style="padding-right:10px;margin-left:10px;width:100%; overflow-y:scroll; height:600px; border-right:solid rgba(167, 166, 166, 0.788) 5px ; ">
-      <div class="row">
-        <div class="col-md-10">
-          <h3 style="text-align:center">Edit profile</h3>
-        </div>
-        <div class="col-md-2 pull-right">
-          <button class="btn btn-primary" style="margin:auto;text-align:right;width:90%;height:100%" (click)="editMode=false">Back</button>
-        </div>
-      </div>
-      <hr>
-      <div style="padding:10px; margin:0px 5px 0 2px;">
-        <form [formGroup]="editProfileForm" (ngSubmit)="editProfile(editProfileForm)">
-          <div class="form-row">
-            <div class="form-group col-md-8" style=" width:80%">
-              <label for="name">Name</label>
-              <input formControlName="name" type="text" class="form-control" id="name" value="{{user?.name}}">
-              <label for="email">Email</label>
-              <input formControlName="email" type="email" class="form-control" id="email" value="{{user?.email}}">
-              <label for="profession">Works as</label>
-              <input formControlName="profession" type="text" class="form-control" id="profession" value="{{user?.profession}}">
-              <label for="profession">Works as</label>
-              <input formControlName="profession" type="text" class="form-control" id="profession" value="{{user?.profession}}">
-            </div>
-            <div class="form-group col-md-4">
-              <img data-toggle="tooltip" data-placement="top" title="Upload Profile pic" (click)="avatar.click()" src="{{basePath}}{{user?.avatar}}"
-                style=" display:inline;cursor: pointer;width:250px; border-radius: 60%; height: 250px">
-              <input style="display:none" #avatar name="avatar" type="file" (change)="uploadAvtar($event)">
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-md-12">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="radiogroup" id="privacyPublic" value="false"
-                  [checked]="user?.privacy ==false" (change)="privacyValue('public')">
-                <label class="form-check-label" for="privacyPublic">Public</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="radiogroup" id="privacyPublic" value="true"
-                  [checked]="user?.privacy==true" (change)="privacyValue('private')">
-                <label class="form-check-label" for="privacyPublic">Private</label>
-              </div>
-            </div>
-          </div>
-          <button type="submit" [disabled]="!editProfileForm.valid" class="btn btn-primary">Save</button>
-        </form>
-      </div>
-    </div>
   </div>
-  <div class="col-md-3 col-sm-3 col-xs-3" style="height :600px; padding-left:0px">
+  <div class="col-md-3 col-sm-3 col-xs-3" style="height :600px; padding-left:0px;border:solid red 1px">
     <app-activity-tiker></app-activity-tiker>
   </div>
 </div>

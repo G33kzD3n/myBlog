@@ -18,22 +18,23 @@ export class MenuComponent implements OnInit {
     this.ar.queryParams.subscribe(
       (param) => {
         if ('newuser' == param.status) {
+          console.log("******inside menu**");
+          console.log(param);
+          console.log("********" + 'newuser' == param.status);
+          console.log("******menu**");
           this.paramStatus = 'newuser';
-          this.ngOnInit();
-        }
-        if (param.id == this.userId) {
-          this.ngOnInit();
+          this.refreshComponent(this.ar.snapshot.params.id);
+          // this.ngOnInit();
         }
       });
   }
   ngOnInit() {
-    this.refreshComponent();
     this.loginForm = this.fb.group({
       'username': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
     });
 
     const status = this.ar.snapshot.queryParamMap.has('status');
-    console.log("query params where " + status);
+    console.log("local" + localStorage.getItem('username'));
     if (localStorage.getItem('username')) {
       this.loggedIn = true;
       this.username = localStorage.getItem('username');
@@ -46,10 +47,12 @@ export class MenuComponent implements OnInit {
     this.loginService.login(form.controls['username'].value)
       .subscribe(
         result => {
-          localStorage.setItem('username', result.user.username);
-          localStorage.setItem('userId', result.user.id);
+          console.log(result.user);
+          localStorage.setItem("username", result.user.username);
+          localStorage.setItem("userId", result.user.id);
           this.loggedIn = true;
           this.username = localStorage.getItem('username');
+          this.userId = localStorage.getItem('userId');
           this.router.navigate(['posts'], { queryParams: { status: "loggedin" } });
         },
         error => {
@@ -67,9 +70,11 @@ export class MenuComponent implements OnInit {
   register() {
     this.router.navigate(['register']);
   }
-  refreshComponent() {
+  refreshComponent(id = null) {
     if (this.paramStatus == 'newuser') {
       this.paramStatus = '';
+      this.router.navigate(['/posts']);
+      this.ngOnInit();
     }
   }
   myPosts() {

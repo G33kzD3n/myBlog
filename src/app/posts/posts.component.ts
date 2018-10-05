@@ -38,7 +38,8 @@ export class PostsComponent implements OnInit {
         }
         if ('newuser' == param.status) {
           this.paramStatus = 'newuser';
-          this.ngOnInit();
+          this.refreshComponent();
+          //this.ngOnInit();
         }
       }
     );

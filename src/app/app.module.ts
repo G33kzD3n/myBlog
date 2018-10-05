@@ -18,6 +18,7 @@ import localeFr from '@angular/common/locales/fr';
 import localeFrExtra from '@angular/common/locales/extra/fr';
 import { RegistrationComponent } from './registration/registration.component';
 import { MyPostsComponent } from './my-posts/my-posts.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
@@ -35,6 +36,7 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     UserProfileComponent,
     RegistrationComponent,
     MyPostsComponent,
+    EditProfileComponent,
 
   ],
   imports: [
