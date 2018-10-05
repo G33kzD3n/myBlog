@@ -2,7 +2,7 @@
 <div class="card" style="border:none;overflow-y:scroll; height:540px">
   <div class=" card pull-up {{i !=0 ?'card-up' :''}}" *ngFor=" let activity of activities;let index=i" style="height:700px">
     <div class="card-body" data-toggle="tooltip" data-placement="top" title="Dated:{{activity.updated_at | date: ' MMM dd yyyy '}}">
-      <img src="../../assets/img/pic.jpg" width="40px;" style="margin-left:0px;margin-right:5px;border-radius:90%; height:40px; float:left">
+      <img *ngIf="activity?.avatar !=null" src="{{basePath}}{{activity?.avatar}}" width="40px;" style="margin-left:0px;margin-right:5px;border-radius:90%; height:40px; float:left">
       <p style="margin-top:5px; text-align: justify; padding-left:10px; font-family: 'Montserrat', sans-serif; font-size:14px; font-weight: 200">
         <a *ngIf="activity.type==='like'" routerLink="/users/{{activity.user_id}}">
           {{activity.author_name}}

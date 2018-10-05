@@ -12,6 +12,7 @@ export class ActivityTikerComponent implements OnInit {
   loggedIn: Boolean = false;
   activities: any = [];
   length: boolean = false;
+  basePath: "";
   constructor(public activityTikerService: ActivityTikerService) { }
 
   ngOnInit() {
@@ -34,6 +35,7 @@ export class ActivityTikerComponent implements OnInit {
           if (res.activities != 0) {
             this.length = true;
             this.activities = res.activities;
+            this.basePath = res.avatar_base_path;
           }
         }
       );
