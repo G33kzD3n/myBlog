@@ -158,15 +158,15 @@ export class UserProfileComponent implements OnInit {
   getPrivacyList(id): Observable<any> {
     return this.followerService.getPrivacyListById(id);
   }
-  setProfileVisibility(followers: any, following: any): any {
+  setProfileVisibility(followers: any[], following: any[]): any {
     if (this.canFollowersSee(followers) && this.canFollowedSee(following) == false) {
       this.canSee = false;
     }
-    if (this.canFollowersSee(followers) || this.canFollowedSee(following == true)) {
+    if (this.canFollowersSee(followers) || this.canFollowedSee(following) == true) {
       this.canSee = true;
     }
   }
-  canFollowedSee(following: any): any {
+  canFollowedSee(following: any[]): any {
     if (following.some(user => {
       return <string>user.id == localStorage.getItem('userId') && user.canSee == true;
     })) {
@@ -177,7 +177,7 @@ export class UserProfileComponent implements OnInit {
       return false;
     }
   }
-  canFollowersSee(followers: any) {
+  canFollowersSee(followers: any[]) {
     if (followers.some(user => {
       return <string>user.id == localStorage.getItem('userId') && user.canSee == true;
     })) {
