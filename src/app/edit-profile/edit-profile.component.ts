@@ -3,10 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { UserProfileService } from '../user-profile/user-profile.service';
 import { FollowerService } from '../posts/service/follower.service';
-import { element } from '@angular/core/src/render3/instructions';
-import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name';
-
-
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -49,6 +45,10 @@ export class EditProfileComponent implements OnInit {
       return this.redirectToHome();
     }
     this.loggedInUserId = localStorage.getItem('userId');
+
+    if (!this.loggedInUserId) {
+      return this.router.navigate(['posts']);
+    }
     this.getProfile();
   }
   createVisibliltyArray(): FormGroup {

@@ -64,7 +64,7 @@
               </button>
             </div>
             <div class="input-group col-md-12 dropdown-input">
-              <input ng-model="query" type="text" class="form-control dropdown-input" aria-label="Text input with dropdown button">
+              <input [(ngModel)]="searchText" type="text" class="form-control dropdown-input" aria-label="Text input with dropdown button">
               <div class="input-group-append" style="padding-left:0px;">
                 <button class="btn btn-outline-secondary dropdown-toggle active" type="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">{{dropdown_btn_name}}</button>
@@ -94,12 +94,12 @@
           <div class="col-md-12" *ngIf="privacy && hideVisiblityForm == true">
             <form [formGroup]="visiblityForm" (ngSubmit)="updatePrivacy()">
               <div formArrayName="visiblity">
-                <ul class="list-group " *ngFor="let vis of visiblityForm.controls.visiblity.controls; let i = index">
+                <ul class="list-group " *ngFor="let vis of visiblityForm.controls.visiblity.controls | filterPipe : searchText ; let i = index">
                   <li class="list-group-item" [formGroupName]="i">
                     <div class="row">
                       <span class="text-muted row-span-followsyou pull-left">{{vis.get('is').value =='both'?'You both
                         follow each
-                        other':''}}</span>
+                        other':'' }}</span>
                       <span class="text-muted row-span-followsyou pull-left">{{vis.get('is').value
                         =='follower'?'Follows you':''}}</span>
                     </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyPostsService } from './my-posts.service';
+import { LikesService } from '../likes/likes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-posts',
@@ -14,7 +16,7 @@ export class MyPostsComponent implements OnInit {
   username: string;
   loggedIn = false;
 
-  constructor(public myPostsService: MyPostsService) { }
+  constructor(public myPostsService: MyPostsService, public likesService: LikesService, public router: Router) { }
 
   ngOnInit() {
     this.username = "";
@@ -22,6 +24,8 @@ export class MyPostsComponent implements OnInit {
       this.loggedIn = true;
       this.username = localStorage.getItem('username');
       this.loadMyPosts();
+    } else {
+      this.router.navigate(['posts']);
     }
 
   }
@@ -38,4 +42,14 @@ export class MyPostsComponent implements OnInit {
         }
       );
   }
+
+  like(index) {
+    this.likesService.likeToggle(this.posts[index][0].id, localStorage.getItem('username')).subscribe(
+      res => {
+        this.posts[index].total = res.likes_count;
+        this.loadMyPosts();
+      }
+    );
+  }
 }
+

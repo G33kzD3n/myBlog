@@ -21,6 +21,7 @@ import localeArExtra from '@angular/common/locales/extra/ar'
 import { RegistrationComponent } from './registration/registration.component';
 import { MyPostsComponent } from './my-posts/my-posts.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { FilterPipePipe } from './filter-pipe.pipe';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 registerLocaleData(localeAr, 'ar', localeArExtra)
@@ -40,6 +41,7 @@ registerLocaleData(localeAr, 'ar', localeArExtra)
     RegistrationComponent,
     MyPostsComponent,
     EditProfileComponent,
+    FilterPipePipe,
 
   ],
   imports: [

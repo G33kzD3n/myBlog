@@ -4,7 +4,7 @@
       <strong>Holy guacamole!</strong>{{message}}
     </div>
     <div class="card-deck" style="margin-left:5px; border-right:solid rgba(167, 166, 166, 0.788) 5px ; width:100%; padding-right:10px;margin-right:0px; overflow-y:scroll; height:600px">
-      <div class="row" *ngFor="let post of posts; let i=index">
+      <div class="row" *ngFor="let post of posts ; let i=index">
         <div class="col-md-4 col-sm-4 col-xs-4 ">
           <img *ngIf="post[0].picture != null" style="margin-top:10px; margin-right:0px;max-width:90%; min-width:90% ; max-height:250px; min-height:300px"
             id="card-img" src="{{basePath}}{{post[0].picture}}" alt="Card image cap">
