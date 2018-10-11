@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="fr" datatype="plaintext" original="ng2.template">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="author" datatype="html">
         <source>Author:</source>
+        <target state="translated">:مؤلف</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/posts/posts.component.html</context>
           <context context-type="linenumber">21</context>
@@ -12,11 +13,22 @@
           <context context-type="sourcefile">app/post-detail/post-detail.component.html</context>
           <context context-type="linenumber">22</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/my-posts/my-posts.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="lastupdated" datatype="html">
         <source>
-                Last updated <x id="INTERPOLATION" equiv-text="{{ post[0].updatedAt.date | date:&quot;MMM dd yyyy &apos;at&apos; hh:mm a&quot;}}"/>
-              </source>
+
+                Last updated
+
+          <x id="INTERPOLATION" equiv-text="{{ post[0].updatedAt.date | date:&quot;MMM dd yyyy 'at' hh:mm a&quot;}}"/>
+        </source>
+         <target state="translated">
+          آخر تحديث
+          <x id="INTERPOLATION" equiv-text="{{ post[0].updatedAt.date | date:&quot;MMM dd yyyy 'at' hh:mm a&quot;}}"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/posts/posts.component.html</context>
           <context context-type="linenumber">25</context>
@@ -25,9 +37,14 @@
           <context context-type="sourcefile">app/post-detail/post-detail.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/my-posts/my-posts.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="ec41614ae4797f73301ae79e7c75b4a31f89f3c0" datatype="html">
         <source>Enter the title here.</source>
+         <target state="translated">أدخل العنوان هنا</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/post/post.component.html</context>
           <context context-type="linenumber">7</context>
@@ -36,9 +53,10 @@
       <trans-unit id="797772dce88e94064c31548d40f845e12809eb52" datatype="html">
         <source>Publish
       </source>
+       <target state="translated">نشر</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/post/post.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <note priority="1" from="description"> The publish button in create post page</note>
         <note priority="1" from="meaning">Button </note>
@@ -47,6 +65,7 @@
         <source>
     My Blog
   </source>
+  <target state="translated">مدونتي</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
           <context context-type="linenumber">2</context>
@@ -55,8 +74,13 @@
         <note priority="1" from="meaning">application name </note>
       </trans-unit>
       <trans-unit id="a2afa0c98e277aae77cc3c1655b15e00a08fe585" datatype="html">
-        <source>Home
-          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>(current)<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <source>
+          Home
+          (current)
+          <x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span>"/>
+          <x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span>"/>
+        </source>
+        <target state="translated">الصفحة الرئيسية</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
           <context context-type="linenumber">13</context>
@@ -67,6 +91,7 @@
       <trans-unit id="f6c5055f8225ccd6c0cc6b44d68f315f1ecac1f6" datatype="html">
         <source>
           New Post</source>
+          <target state="translated">منشور جديد</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
           <context context-type="linenumber">18</context>
@@ -74,61 +99,92 @@
         <note priority="1" from="description"> The link for new post in menu</note>
         <note priority="1" from="meaning">New Post link </note>
       </trans-unit>
-      <trans-unit id="cc256a5091bd78180efb21febb8779777f7b012a" datatype="html">
-        <source>My Posts</source>
+      <trans-unit id="1130601f0c289393db39221bbc53a22f98c861d5" datatype="html"> -->
+        <source>My
+          Posts</source>
+           <target state="translated">مشاركاتي</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <note priority="1" from="description"> The link my posts in menu</note>
         <note priority="1" from="meaning">My Posts link </note>
       </trans-unit>
-      <trans-unit id="9ea7645feb678df4c7b177722f65010fbdcc0b25" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{username}}"/></source>
+      <!-- <trans-unit id="9ea7645feb678df4c7b177722f65010fbdcc0b25" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{username}}"/>
+        </source>
         <context-group purpose="location">
           <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <note priority="1" from="description"> Link for profile in menu</note>
         <note priority="1" from="meaning">Username link </note>
-      </trans-unit>
+      </trans-unit> -->
       <trans-unit id="a06ff35e1cc7bed2709d5a6ea0a443fd7c0b6a32" datatype="html">
         <source>Logout</source>
+         <target state="translated">الخروج</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <note priority="1" from="description"> The logout link in menu</note>
         <note priority="1" from="meaning">Logout link </note>
       </trans-unit>
       <trans-unit id="517ca3f4a515a87ab4ebcbd5b30717926d8de8f1" datatype="html">
         <source>Register</source>
+         <target state="translated">تسجيل</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">35</context>
         </context-group>
         <note priority="1" from="description"> The Registration page link in menu</note>
         <note priority="1" from="meaning">Registration link </note>
       </trans-unit>
       <trans-unit id="f61fa89ea0b68be97a48ebaec8463158789ef62f" datatype="html">
         <source>Enter username to login </source>
+         <target state="translated">أدخل اسم المستخدم لتسجيل الدخول</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="102a41540feb186968741471446803b698f11990" datatype="html">
         <source>
           Login</source>
+          <target state="translated">تسجيل الدخول</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/elements/menu/menu.component.html</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">41</context>
         </context-group>
         <note priority="1" from="description">Logout button in menu</note>
         <note priority="1" from="meaning">logout button</note>
       </trans-unit>
       <trans-unit id="69e8d0b35b4f4de23b2b7c3f2475d0523757c66a" datatype="html">
+       <trans-unit id="f2c5381c594b37ec637b172d1ce3eed957e04b56" datatype="html">
+        <source>Comments for this post</source>
+        <target>تعليقات على هذا المنصب</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/comments/comments.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <note priority="1" from="description"> The heading for comments in postdetail</note>
+        <note priority="1" from="meaning">Comment section  </note>
+      </trans-unit>
+      <trans-unit id="2a6ca6e3b453caaa30d5711e51c0c1635c60e264" datatype="html">
+        <source>view
+    previous
+    comments</source>
+    <target>عرض التعليقات السابقة</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/comments/comments.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <note priority="1" from="description"> A link for view more comments</note>
+        <note priority="1" from="meaning">Link view more comments </note>
+      </trans-unit>
         <source>Top 20 Tikers</source>
+        <target state="translated">أعلى المتنزهين</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/activity-tiker/activity-tiker.component.html</context>
           <context context-type="linenumber">1</context>
@@ -136,17 +192,27 @@
         <note priority="1" from="description">The title text inisde the activity tiker</note>
         <note priority="1" from="meaning">Title text </note>
       </trans-unit>
-      <trans-unit id="2515db1c9f5e571986e7ba32857f3889f53288b0" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{activity.type===&quot;like&quot; ? &apos;Liked the &apos;:&quot;&quot;}}"/></source>
+      <!-- <trans-unit id="2515db1c9f5e571986e7ba32857f3889f53288b0" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{activity.type===&quot;like&quot; ? 'Liked the ':&quot;&quot;}}"/>
+        </source>
+          <target state="translated">{{activity.type===&quot;like&quot; ? 'أحب ' &apos;&apos;:&quot;&quot;}}</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/activity-tiker/activity-tiker.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
-      </trans-unit>
+      </trans-unit> -->
       <trans-unit id="at" datatype="html">
         <source>
-          At<x id="INTERPOLATION" equiv-text="{{ activity.updated_at | date:&quot; hh:mm a&quot;}}"/>
+
+          At
+
+          <x id="INTERPOLATION" equiv-text="{{ activity.updated_at | date:&quot; hh:mm a&quot;}}"/>
         </source>
+         <target state="translated">
+         في
+          <x id="INTERPOLATION" equiv-text="{{ activity.updated_at | date:&quot; hh:mm a&quot;}}"/>
+        </target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/activity-tiker/activity-tiker.component.html</context>
           <context context-type="linenumber">14</context>

@@ -63,11 +63,11 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="input-group col-md-6 dropdown-input">
-              <input type="text" class="form-control dropdown-input" aria-label="Text input with dropdown button">
+            <div class="input-group col-md-12 dropdown-input">
+              <input ng-model="query" type="text" class="form-control dropdown-input" aria-label="Text input with dropdown button">
               <div class="input-group-append" style="padding-left:0px;">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">Dropdown</button>
+                <button class="btn btn-outline-secondary dropdown-toggle active" type="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">{{dropdown_btn_name}}</button>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" (click)="showAll()">All</a>
                   <a class="dropdown-item" (click)="noFollowing ==false ? showFollowing() : showNoFollowingMessage()">Following</a>
@@ -78,50 +78,58 @@
             </div>
           </div>
         </div>
-        <div class="row" *ngIf="privacy">
-          <div class="col-md-6" *ngIf="privacy && hideVisiblityForm == true">
-            <div class="row" style="margin-top: 10px">
-              <p class="col-md-8">ALL Users</p>
-              <div class=" input-group col-md-4 form-check pull-right">
-                <input class="form-check-input" type="checkbox" (click)="checkAll($event)" [checked]="allowAllClicked">
-                <label class="form-check-label">
-                  Allow ALL
-                </label>
-              </div>
+        <div class="row" style="margin-top: 10px" *ngIf="privacy">
+          <div class="col-md-10">
+          </div>
+          <div class="col-md-2 pl-38">
+            <div class=" input-group form-check">
+              <input class="form-check-input pull-right" type="checkbox" (click)="checkAll($event)" [checked]="allowAllClicked">
+              <label class="form-check-label ">
+                Allow ALL
+              </label>
             </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="privacy">
+          <div class="col-md-12" *ngIf="privacy && hideVisiblityForm == true">
             <form [formGroup]="visiblityForm" (ngSubmit)="updatePrivacy()">
               <div formArrayName="visiblity">
-                <ul class="list-group" *ngFor="let vis of visiblityForm.controls.visiblity.controls; let i = index">
+                <ul class="list-group " *ngFor="let vis of visiblityForm.controls.visiblity.controls; let i = index">
                   <li class="list-group-item" [formGroupName]="i">
-                    <span class="names pull-left">{{vis.get('name').value}} is {{vis.get('is').value}}</span>
-                    <div class="form-check pull-right">
-                      <input class="form-check-input" type="checkbox" (change)="toggleCanSee(i)" [checked]="vis.get('cansee').value">
-                      <label class="form-check-label" for="following?.id">
-                        Allow
-                      </label>
+                    <div class="row">
+                      <span class="text-muted row-span-followsyou pull-left">{{vis.get('is').value =='both'?'You both
+                        follow each
+                        other':''}}</span>
+                      <span class="text-muted row-span-followsyou pull-left">{{vis.get('is').value
+                        =='follower'?'Follows you':''}}</span>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-1" style="padding-right: 0px">
+                        <img readonly *ngIf="vis.get('avatar').value !=null" src="http://localhost:9100/avatars/{{vis.get('avatar').value}}"
+                          width="40px;" class="img-avatar-followers pull-left">
+                      </div>
+                      <div class="col-md-7" style=" padding-left: 0px;margin-left:0px">
+                        <a class="row a-names div-col-a-authorname" routerLink="/users/{{vis.get('followingId').value}}">
+                          <span class="names">{{vis.get('name').value}}
+                            <i class="fa fa-lock privacy-lock" *ngIf="vis.get('privacy').value"></i>
+                          </span>
+
+                        </a>
+                      </div>
+                      <div class="col-md-2">
+                      </div>
+                      <div class=" col-md-2 form-check pull-right" style="padding-left:40px;">
+                        <input class="form-check-input" type="checkbox" (change)="toggleCanSee(i)" [checked]="vis.get('cansee').value">
+                        <label class="form-check-label" for="following?.id">
+                          Allow
+                        </label>
+                      </div>
                     </div>
                   </li>
                 </ul>
               </div>
               <button class="btn btn-primary" style="margin-top:10px">Update Privacy</button>
             </form>
-          </div>
-          <div class="col-md-6" *ngIf="privacy && hideProfileViewerForm == true">
-            <p>Can See Your Profile</p>
-            <!-- <form [formGroup]="visiblityForm">
-              <div formArrayName="profileViewer">
-                <ul class="list-group" *ngFor="let pviewer of visiblityForm.controls.profileViewer.controls; let i = index">
-                  <li class="list-group-item" [formGroupName]="i">
-                    <span class="names pull-left">{{pviewer.get('name').value}}</span>
-                    <div class="form-check pull-right">
-                      <i class="fa fa-trash" style="font-size:15px;" (click)="removeViewer(pviewer.get('id'))">
-                        Remove
-                      </i>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </form> -->
           </div>
         </div>
       </div>

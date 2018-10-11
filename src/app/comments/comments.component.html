@@ -1,5 +1,5 @@
 <div id="comments-block">
-  <h3>Comments for this post</h3>
+  <h3 i18n="Comment section  | The heading for comments in postdetail">Comments for this post</h3>
   <div class="alert alert-info alert-dismissible show" role="alert" *ngIf="noMoreComments === true">
     <strong>Holy guacamole!</strong>No more Comments.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -21,7 +21,8 @@
       </i>
     </blockquote>
   </div>
-  <a (click)="loadPreviousComments(next)" style="text-decoration-line: underline; color:blue;">view previous
+  <a (click)="loadPreviousComments(next)" style="text-decoration-line: underline; color:blue;" i18n="Link view more comments | A link for view more comments">view
+    previous
     comments</a>
 </div>
 <div class="row">

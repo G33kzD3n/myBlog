@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
 import { UserProfileService } from '../user-profile/user-profile.service';
 import { FollowerService } from '../posts/service/follower.service';
+import { element } from '@angular/core/src/render3/instructions';
+import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name';
 
 
 @Component({
@@ -28,6 +30,8 @@ export class EditProfileComponent implements OnInit {
   noFollowers = false;
   noFollowing = false;
   errorMessage = null;
+  dropdown_btn_name = "All";
+  backup: any = [];
   constructor(public ar: ActivatedRoute, public router: Router, public fb: FormBuilder, public profileService: UserProfileService, public followerService: FollowerService) {
     this.editProfileForm = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
@@ -54,6 +58,8 @@ export class EditProfileComponent implements OnInit {
       name: "",
       is: "",
       cansee: 0,
+      avatar: "",
+      privacy: ""
     });
   }
 
@@ -89,6 +95,9 @@ export class EditProfileComponent implements OnInit {
           if (res.status == "success") {
             this.router.navigate(['users/' + localStorage.getItem('userId')], { queryParams: { status: 'updatedprofile' } })
           }
+          if (res.status == "error") {
+            this.router.navigate(['users/' + localStorage.getItem('userId')], { queryParams: { status: 'nothingupdated' } })
+          }
         }
       );
   }
@@ -105,13 +114,64 @@ export class EditProfileComponent implements OnInit {
     this.editProfileForm.controls['profession'].setValue(this.user.profession);
     this.editProfileForm.controls['email'].setValue(this.user.email);
   }
+  filterUsers(e) {
+    const control = <FormArray>this.visiblityForm.controls['visiblity'];
+    if (e.target.value != "") {
+      let nameArray: any = [];
+      this.backup.forEach((element, index) => {
+        nameArray.push(element.name);
+      });
+      let indexArray: any = [];
+      nameArray.forEach((name, index) => {
+        if (name.match(new RegExp(e.target.value, "i"))) {
+          indexArray.push(index);
+        }
+      });
 
+      let users: any = [];
+
+
+      console.log("matched users are");
+      console.log(indexArray);
+
+      indexArray.forEach(element => {
+        console.log("index " + element);
+        this.backup.map(user => {
+          if (element == user.id) {
+            users.push(user);
+          }
+        });
+      });
+      console.log("^^^ length is b4 del " + this.visiblityForm.controls.visiblity.value.length);
+      // let i = 0;
+      if (this.visiblityForm.controls.visiblity.value.length > 0) {
+        this.resetVisiblity();
+      }
+      // while () {
+      //   control.removeAt(i);
+      //   i++;
+      // }
+      console.log("^^^ length is after del " + this.visiblityForm.controls.visiblity.value.length);
+      this.makeArray(control, users);
+      // control.push(users);
+      console.log("*****" + JSON.stringify(users));
+    }
+    else {
+      this.makeArray(control, this.backup);
+    }
+  }
+  restoreContorlArray() {
+    const control = <FormArray>this.visiblityForm.controls['visiblity'];
+    this.makeArray(control, this.backup);
+    console.log("restored array");
+  }
   uploadAvtar(event) {
     this.avatar = event.target.files[0];
     // console.log(this.avatar);
   }
 
   showFollowing() {
+    this.dropdown_btn_name = "Following";
     const control = <FormArray>this.visiblityForm.controls['visiblity'];
     while (this.visiblityForm.controls.visiblity.value.length > 1) {
       this.resetVisiblity();
@@ -119,6 +179,7 @@ export class EditProfileComponent implements OnInit {
     this.makeUsersFollowingArray(control, this.usersFollowing);
   }
   showFollowers() {
+    this.dropdown_btn_name = "Followers";
     const control = <FormArray>this.visiblityForm.controls['visiblity'];
     if (this.followers.length <= 0) {
       this.noFollowers = true;
@@ -133,18 +194,19 @@ export class EditProfileComponent implements OnInit {
     }
   }
   showAll() {
+    this.dropdown_btn_name = "All";
     const control = <FormArray>this.visiblityForm.controls['visiblity'];
     if (this.followers.length > 0 && this.followers.length > 0) {
       while (this.visiblityForm.controls.visiblity.value.length > 1) {
         this.resetVisiblity();
       }
       console.log("@@@@@insiede showall");
-      this.makeAllUsersArray(control, this.allUsers);
+      this.makeArray(control, this.allUsers);
     }
   }
   resetVisiblity() {
+    const control = <FormArray>this.visiblityForm.controls['visiblity'];
     if (this.visiblityForm.controls.visiblity.value.length > 0) {
-      const control = <FormArray>this.visiblityForm.controls['visiblity'];
       this.visiblityForm.controls.visiblity.value.forEach((element, index) => {
         control.removeAt(index);
       });
@@ -226,6 +288,23 @@ export class EditProfileComponent implements OnInit {
       control.at(i).get('followingId').setValue(users[i].id);
       control.at(i).get('name').setValue(users[i].name);
       control.at(i).get('cansee').setValue(users[i].canSee == 1 ? 1 : 0);
+      control.at(i).get('avatar').setValue(users[i].avatar);
+      control.at(i).get('privacy').setValue(users[i].privacy);
+      control.at(i).get('is').setValue(users[i].is);
+      i < users.length - 1 ? control.push(this.createVisibliltyArray()) : '';
+    }
+    control.removeAt(i);
+    this.backup = this.visiblityForm.controls.visiblity.value;
+  }
+  makeArray(control, users) {
+    let i = 0;
+    for (; i < users.length; i++) {
+      control.at(i).get('id').setValue(i);
+      control.at(i).get('followingId').setValue(users[i].id);
+      control.at(i).get('name').setValue(users[i].name);
+      control.at(i).get('cansee').setValue(users[i].canSee == 1 ? 1 : 0);
+      control.at(i).get('avatar').setValue(users[i].avatar);
+      control.at(i).get('privacy').setValue(users[i].privacy);
       control.at(i).get('is').setValue(users[i].is);
       i < users.length - 1 ? control.push(this.createVisibliltyArray()) : '';
     }
@@ -238,6 +317,8 @@ export class EditProfileComponent implements OnInit {
       control.at(i).get('followingId').setValue(users[i].id);
       control.at(i).get('name').setValue(users[i].name);
       control.at(i).get('cansee').setValue(users[i].canSee == 1 ? 1 : 0);
+      control.at(i).get('avatar').setValue(users[i].avatar);
+      control.at(i).get('privacy').setValue(users[i].privacy);
       control.at(i).get('is').setValue(users[i].is);
       i < users.length - 1 ? control.push(this.createVisibliltyArray()) : '';
     }
@@ -250,6 +331,8 @@ export class EditProfileComponent implements OnInit {
       control.at(i).get('followingId').setValue(users[i].id);
       control.at(i).get('name').setValue(users[i].name);
       control.at(i).get('cansee').setValue(users[i].canSee == 1 ? 1 : 0);
+      control.at(i).get('avatar').setValue(users[i].avatar);
+      control.at(i).get('privacy').setValue(users[i].privacy);
       control.at(i).get('is').setValue(users[i].is);
       i < users.length - 1 ? control.push(this.createVisibliltyArray()) : '';
     }

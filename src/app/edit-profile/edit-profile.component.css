@@ -1,3 +1,45 @@
 .dropdown-input{
     padding-left: 0px;
 }
+.pl-38{
+    padding-left: 38px;
+     padding-bottom: 10px;
+}
+.pb-10{
+    padding-bottom: 10px;
+}
+.row-span-followsyou{
+    font-size: 13px;
+     font-family: 'Open Sans', sans-serif;
+    text-align: justify;
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 400;
+    padding-left: 10px;
+}
+.img-avatar-followers{
+     margin-left:0px;
+     margin-right:5px;
+     border-radius:90%;
+      height:40px;
+      float:left;
+      display:block
+}
+.privacy-lock{
+    color:black;
+    font-size: 16px;
+}
+.div-col-a-authorname{
+     font-size: 10px;
+       font-family: 'Open Sans', sans-serif;
+        font-weight: 100;
+        padding-left: 9px;
+}
+.a-names .names{
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    float:left;
+    color:gray;
+    font-family: 'Open Sans', sans-serif;
+}

@@ -1,6 +1,39 @@
 .img-cover{
    height: 300px;
 }
+.row-span-followsyou{
+    font-size: 13px;
+     font-family: 'Open Sans', sans-serif;
+    text-align: justify;
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 400;
+    padding-left: 10px;
+}
+.img-avatar-followers{
+     margin-left:0px;
+     margin-right:5px;
+     border-radius:90%;
+      height:40px;
+      float:left;
+      display:block
+}
+.btn-border{
+    background-color: white;
+    border:solid blue 1px;
+}
+.div-col-a-name{
+    margin:0px;
+     font-size: 13x;
+       font-family: 'Open Sans', sans-serif;
+        font-weight: 800;
+}
+.div-col-a-authorname{
+     font-size: 10px;
+       font-family: 'Open Sans', sans-serif;
+        font-weight: 100;
+        padding-left: 9px;
+}
 .img-thumbnail{
     height: 190px;
     width: 190px;
@@ -102,13 +135,16 @@
     margin-bottom :20px;
 }
 .a-names .names{
- font-size: 16px;
- font-weight: 800;
- cursor: pointer;
-     float:left;
-       color:gray;
-     font-family: 'Open Sans', sans-serif;
-     font-weight: 900ms;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    float:left;
+    color:gray;
+    font-family: 'Open Sans', sans-serif;
+}
+.privacy-lock{
+    color:black;
+    font-size: 16px;
 }
 .hide{
     display: none;

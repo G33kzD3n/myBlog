@@ -36,6 +36,9 @@ export class UserProfileComponent implements OnInit {
   paramStatus = "";
   canSee: Boolean = false;
   constructor(public ar: ActivatedRoute, private profileService: UserProfileService, public followerService: FollowerService, public router: Router, public fb: FormBuilder) {
+  }
+
+  init() {
     this.ar.queryParams.subscribe(
       param => {
         if ('updatedprofile' == param.status) {
@@ -45,6 +48,13 @@ export class UserProfileComponent implements OnInit {
         }
         if ('updateprivacy' == param.status) {
           this.paramStatus = 'updateprivacy';
+          this.paramStatus = null;
+          this.avatar = null;
+          this.loggedIn = true;
+          this.updated = true;
+          this.showProfile(localStorage.getItem('userId'));
+        }
+        if ('nothingupdated' == param.status) {
           this.paramStatus = null;
           this.avatar = null;
           this.loggedIn = true;
@@ -66,10 +76,10 @@ export class UserProfileComponent implements OnInit {
         }
       }
     );
-
   }
 
   ngOnInit() {
+    this.init();
     const routeParams = this.ar.snapshot.params;
     if (localStorage.getItem('userId')) {
       this.loggedInUserId = localStorage.getItem('userId');
@@ -148,9 +158,16 @@ export class UserProfileComponent implements OnInit {
     this.followerService.followToggle(toBeFollowedUsersId)
       .subscribe(
         res => {
-          this.follow_btn_name = "UnFollow";
-          console.log(res.data);
-          this.showProfile(toBeFollowedUsersId);
+          if (this.follow_btn_name == "Following") {
+            console.log("name was " + this.follow_btn_name);
+            this.follow_btn_name = "Follow";
+          } else {
+            console.log("name was " + this.follow_btn_name);
+            this.follow_btn_name = "Following";
+          }
+          this.init();
+          // console.log(res.data);
+          //this.showProfile(toBeFollowedUsersId);
         }, err => {
         }
       );

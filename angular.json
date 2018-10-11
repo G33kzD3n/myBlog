@@ -32,9 +32,18 @@
           "configurations": {
             "fr": {
               "aot": true,
+              "outputPath": "dist/myBlog-fr/",
               "i18nFile": "src/locale/fr/messages.fr.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "fr"
+            },
+            "ar": {
+              "aot": true,
+              "baseHref": "/ar/",
+              "outputPath": "dist/myBlog-ar/",
+              "i18nFile": "src/locale/ar/messages.ar.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "ar"
             },
             "production": {
               "fileReplacements": [
@@ -66,6 +75,9 @@
             },
             "fr": {
               "browserTarget": "myBlog:build:fr"
+            },
+            "ar": {
+              "browserTarget": "myBlog:build:ar"
             }
           }
         },

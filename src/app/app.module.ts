@@ -15,12 +15,15 @@ import { ActivityTikerComponent } from './activity-tiker/activity-tiker.componen
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import localeAr from '@angular/common/locales/ar';
 import localeFrExtra from '@angular/common/locales/extra/fr';
+import localeArExtra from '@angular/common/locales/extra/ar'
 import { RegistrationComponent } from './registration/registration.component';
 import { MyPostsComponent } from './my-posts/my-posts.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
+registerLocaleData(localeAr, 'ar', localeArExtra)
 
 @NgModule({
   declarations: [

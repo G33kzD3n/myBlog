@@ -7,11 +7,11 @@
         <a *ngIf="activity.type==='like'" routerLink="/users/{{activity.user_id}}">
           {{activity.author_name}}
         </a>
-        <ng-container i18n>{{activity.type==="like" ? 'Liked the ':""}}</ng-container>
+        <ng-container>{{activity.type==="like" ? 'Liked the ':""}}</ng-container>
         <a routerLink="/posts/{{activity.post_id}}">
           {{activity.type==="like"? "Post ":""}}
         </a>
-        <span *ngIf="activity.type === 'like'" class="text-muted" style="font-size:12px" i18n="@@at">
+        <span *ngIf="activity.type === 'like'" class="text-muted" style="font-size:12px">
           At{{ activity.updated_at | date:" hh:mm a"}}
         </span>
         <a *ngIf="activity.type === 'post' " routerLink="/users/{{activity.user_id}}">{{activity.author_name}}</a>
