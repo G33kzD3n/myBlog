@@ -1,6 +1,6 @@
 #comments-block h3{
+    margin-top: 0px;
    text-align:center;
-   margin-bottom: 10px;
 }
 
 #comments-block{
@@ -11,4 +11,9 @@
 blockquote{
     border-left :solid gray 5px;
     padding-left:10px;
+}
+#add-scroll-bar{
+    border-right: solid gray 5px;
+    overflow-y:scroll;
+     height:150px
 }

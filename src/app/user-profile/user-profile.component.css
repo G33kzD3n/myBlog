@@ -1,3 +1,6 @@
+a{
+    text-decoration: none;
+}
 .img-cover{
    height: 300px;
 }
@@ -34,6 +37,13 @@
         font-weight: 100;
         padding-left: 9px;
 }
+.my-card{
+     padding-top:10px;
+    margin-top: 10px;
+    padding-right:10px;
+    padding-left:10px;
+    margin-left:10px;
+}
 .img-thumbnail{
     height: 190px;
     width: 190px;
@@ -68,9 +78,9 @@
     width:30%;
 }
 .edit-icon{
-    font-size: 16px;
     cursor: pointer;
     padding:10px;
+    font-size: 20px;
 }
 .ptop{
     margin-top: 100px;
@@ -138,9 +148,14 @@
     font-size: 16px;
     font-weight: 800;
     cursor: pointer;
+     letter-spacing:1px;
     float:left;
-    color:gray;
+     color:rgb(11, 156, 156);
     font-family: 'Open Sans', sans-serif;
+}
+.follow-btn:hover{
+    color:white;
+    background: blue;
 }
 .privacy-lock{
     color:black;
@@ -150,10 +165,7 @@
     display: none;
 }
 ul .a-names :hover{
-     color :black;
-     transition-delay: 100ms;
-    transform: scale(1.2);
-
+      color :rgba(178, 179, 177, 0.856);
 }
 .ng-valid[required], .ng-valid.required  {
   border-left: 5px solid #42A948; /* green */
@@ -167,4 +179,9 @@ ul .a-names :hover{
     font-size: 16px;
     margin:2px;
     float: left;
+}
+.tiker{
+    cursor: pointer;
+    height :600px;
+    padding-left:0px
 }

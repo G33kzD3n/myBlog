@@ -25,7 +25,7 @@
     previous
     comments</a>
 </div>
-<div class="row">
+<div class="row" style="height: 170px;">
   <div class="col-md-12 col-xs-12 col-sm-12">
     <div *ngIf="published === true" class="alert alert-warning alert-dismissible show" role="alert">
       <strong>Holy guacamole!</strong> Comment posted successfully.
@@ -44,7 +44,8 @@
       <div class="errorBox" *ngIf="commentForm.controls['body'].hasError('minlength') && commentForm.controls['body'].touched">
         *Body must be more than 5.
       </div>
-      <button style="cursor: pointer" class="btn btn-primary" id="publish-btn" [disabled]="!commentForm.valid" type="submit">Publish
+      <button style="cursor: pointer ;position:relative;bottom:10px;" class="btn btn-primary" id="publish-btn"
+        [disabled]="!commentForm.valid" type="submit">Publish
       </button>
     </form>
   </div>

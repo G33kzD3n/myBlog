@@ -1,44 +1,44 @@
 <div class="row">
   <div class="col-xs-12 col-md-12 col-sm-12">
-    <div class="card-deck " style="margin-left:5px; margin-right:10px">
+    <div class="card-deck " style="margin-left:5px; margin-right:10px;margin-top:0px;">
       <div *ngIf="updated === true" class="alert alert-warning alert-dismissible show" role="alert">
         <strong>Holy guacamole!</strong> Post updated successfully.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="updated =false">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="card">
-        <img *ngIf="post[0]?.picture != null" class="card-img" id="card-img" style="max-height:700px; width:auto" src="{{basePath}}{{post[0]?.picture}}"
-          alt="Card image cap">
+      <div class="card" style="margin-top:15px;">
         <div class="card-body">
-          <h2 class="card-title"><strong>{{post[0]?.title}}</strong></h2>
+          <img *ngIf="post[0]?.picture != null" class="card-img" id="card-img" style="max-height:700px; width:100%" src="{{basePath}}{{post[0]?.picture}}"
+            alt="Card image cap">
+          <h2 class="card-title a-title"><strong>{{post[0]?.title}}</strong></h2>
           <a *ngIf="username === post[0]?.user.authorName" class="btn btn-default" (click)="editPost(post[0]?.id)">
             <span style="font-size:20px;padding-right: 10px">Edit </span>
             <span class="fa fa-edit" aria-hidden="true" style="font-size:20px;">
             </span>
           </a>
           <p style="text-align:justify">{{post[0]?.body}}</p>
-          <p class="card-text" id="author">
-            <small class="text-muted" i18n="@@author">Author:</small>
-            <b>{{post[0]?.user.username}}</b>({{post[0]?.user.name}})
+          <p class="card-text p-name" id="author"><b>
+              <a routerLink="/users/{{post[0]?.user?.id}}">({{post[0]?.user?.name}})</a></b>
           </p>
           <p class="card-text " id="date">
             <small class="text-muted" i18n="@@lastupdated">Last updated {{post[0]?.updatedAt.date | date:"MMM dd yyyy
               'at' hh:mm a" }}
             </small>
           </p>
-          <span style="cursor: pointer;float:left">{{post?.total_likes}}<i *ngIf="loggedIn === true" class="fa fa-thumbs-up"
-              (click)="like(post[0]?.id)" style="padding-left:5px;font-size:25px;"></i></span>
+          <span class="badge like-span">{{post?.total_likes}}<i *ngIf="loggedIn === true" class="fa fa-thumbs-up like-span-btn"
+              (click)="like(post[0]?.id)"></i></span>
         </div>
       </div>
     </div>
-    <div class="card-deck " style="margin-top:15px; margin-right:10px; margin-left:10px">
-      <div class="card">
-        <div class="card-body">
-          <app-comments style="cursor: pointer"></app-comments>
-          <!-- <app-storecomment *ngIf="loggedIn === true"></app-storecomment> -->
-        </div>
-      </div>
+  </div>
+</div>
+<div class="row card-deck" style="padding-top:10px; margin-left:5px; margin-right:10px; height: 450px;">
+  <div class="card col-md-12" style="width: 60%;padding-top:0px;">
+    <div class=" card-body
+    ">
+      <app-comments style=" cursor: pointer">
+      </app-comments>
     </div>
   </div>
 </div>
