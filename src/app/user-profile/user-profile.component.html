@@ -7,9 +7,9 @@
       </button>
     </div>
     <div class="card my-card">
-      <img class="card-img-top img-cover" src="../../assets/img/pic.jpg" alt="Card image cap" height="20%">
-      <img *ngIf="user?.avatar !=null" class=" card-img-top img-thumbnail" src="{{basePath}}{{user?.avatar}}" alt="Card image cap">
       <div class="card-body custom-card">
+        <img class="card-img-top img-cover" src="../../assets/img/pic.jpg" alt="Card image cap" height="20%">
+        <img *ngIf="user?.avatar !=null" class=" card-img-top img-thumbnail" src="{{basePath}}{{user?.avatar}}" alt="Card image cap">
         <div class="row head-name-follow {{user?.avatar == null ? ' ptop':''}}">
           <div class="col-md-4"></div>
           <div class="col-md-4 col-sm-4">
@@ -48,20 +48,19 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12 follow-following-list" *ngIf="loggedInUserId == user?.id || user?.privacy == true && canSee == true">
-        <ul class="nav nav-tabs">
+      <div class="follow-following-list" *ngIf="loggedInUserId == user?.id || user?.privacy == true && canSee == true">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" *ngIf="canSee || loggedInUserId == user?.id">
-            <a class=" nav-link
-            {{showFollowers == true ? ' active' :''}}" (click)="showFollowerUsers()">Followers</a>
+            <a id="followers-tab" class="nav-link{{showFollowers == true ? ' makeactive ' :''}}" (click)="showFollowerUsers()">Followers</a>
           </li>
           <li class="nav-item" *ngIf="canSee || loggedInUserId == user?.id ">
-            <a class="nav-link {{showFollowing==true ?' active':''}}" (click)="showFollowingUsers()">Following</a>
+            <a class="nav-link{{showFollowing==true ?' makeactive':''}}" (click)="showFollowingUsers()">Following</a>
           </li>
         </ul>
-        <div style="border:none">
+        <div class="tab-content">
           <div *ngIf="showFollowers === true">
-            <ul class="list-group" *ngFor="let follower of myFollowers">
-              <li class="list-group-item " style="border-top:none">
+            <ul class="list-group" id="followers" style="margin-bottom: 10px!important; border:none;">
+              <li class="list-group-item " style="border:none;" *ngFor="let follower of myFollowers">
                 <div class="row">
                   <span class="text-muted row-span-followsyou pull-left">{{follower?.is =='both'?'You both follow each
                     other':''}}</span>
@@ -85,12 +84,13 @@
                     </button>
                   </div>
                 </div>
+                <hr style="padding-bottom: 0px!important; padding-top:0px!important;margin-top:10px!important;margin-bottom:0px!important;">
               </li>
             </ul>
           </div>
           <div *ngIf="showFollowing === true">
-            <ul class="list-group" *ngFor="let following of followingTo">
-              <li class="list-group-item">
+            <ul class="list-group">
+              <li class="list-group-item" style="border:none" *ngFor="let following of followingTo">
                 <div class="row">
                   <span class="text-muted row-span-followsyou pull-left">{{following?.is =='follower'?'Follows
                     you':''}}</span>
@@ -122,6 +122,7 @@
                     </button>
                   </div>
                 </div>
+                <hr>
               </li>
             </ul>
           </div>

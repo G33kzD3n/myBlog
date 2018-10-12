@@ -4,12 +4,17 @@ a{
 .img-cover{
    height: 300px;
 }
+li{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
 .row-span-followsyou{
+    padding-top:0px !important;
     font-size: 13px;
      font-family: 'Open Sans', sans-serif;
     text-align: justify;
     display: block;
-    margin-bottom: 15px;
+    margin-bottom:0px!important;
     font-weight: 400;
     padding-left: 10px;
 }
@@ -19,7 +24,8 @@ a{
      border-radius:90%;
       height:40px;
       float:left;
-      display:block
+      display:block;
+      margin-top: 0px!important;
 }
 .btn-border{
     background-color: white;
@@ -38,11 +44,14 @@ a{
         padding-left: 9px;
 }
 .my-card{
+    overflow-y:scroll;
+    height:590px;
      padding-top:10px;
     margin-top: 10px;
     padding-right:10px;
     padding-left:10px;
     margin-left:10px;
+    /* height:100%; */
 }
 .img-thumbnail{
     height: 190px;
@@ -52,7 +61,7 @@ a{
     margin-left:auto;
     margin-right:auto;
     position: relative;
-    bottom: 100px;
+    /* bottom: 100px; */
     margin-bottom:3xp;
 }
 .follow-btn{
@@ -61,7 +70,7 @@ a{
 .custom-card{
     /* margin : 0px auto 0px auto; */
     position: relative;
-    bottom: 100px;
+    /* bottom: 100px; */
 }
 .edit-btn{
       float:left;
@@ -74,7 +83,7 @@ a{
     display:block;
 } */
 .follower-following-posts-row{
-    margin-top:30px;
+    margin-top:10px;
     width:30%;
 }
 .edit-icon{
@@ -97,6 +106,7 @@ a{
     display:block;
     text-align: center;
     margin : 0px auto;
+    margin-top: 0px!important;
 }
 .username{
      font-family: 'Open Sans', sans-serif;
@@ -104,6 +114,7 @@ a{
     font-weight: 10;
     letter-spacing:1px;
     color :gray;
+     margin-top: 0px!important;
 }
 .profession{
     color :black;
@@ -124,25 +135,31 @@ a{
 }
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
     color:blue;
+    border:none;
     transition: 400ms;
      cursor: pointer;
      font-size: 18px;
     font-weight: 600;
+    /* border-bottom:none; */
 }
 .blurbg{
     filter:blur(1px);
     background-color: rgba(0, 0, 0, 0.386);
 }
-.active{
+.makeactive{
     cursor: pointer;
-    color:rgba(93, 93, 218, 0.671);
-     font-size: 16px;
-    font-weight: 800;
+    color:rgb(27, 27, 228)!important;
+     /* font-size: 16px; */
+    font-weight: 500!important;
+    border-left:solid #dee2e6 1px;
+     border-top:solid #dee2e6 1px;
+      border-right:solid #dee2e6 1px;
+    /* border-bottom:none;
 }
 .follow-following-list{
+    padding-top:2px!important;
      cursor: pointer;
-    padding-bottom: 100px;
-    margin-bottom :20px;
+    /* padding-bottom: 100px; */
 }
 .a-names .names{
     font-size: 16px;
@@ -151,7 +168,7 @@ a{
      letter-spacing:1px;
     float:left;
      color:rgb(11, 156, 156);
-    font-family: 'Open Sans', sans-serif;
+    //font-family: 'Open Sans', sans-serif;
 }
 .follow-btn:hover{
     color:white;

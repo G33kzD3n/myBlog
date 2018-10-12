@@ -4,6 +4,28 @@
 .ng-invalid:not(form)  {
   border-left: 5px solid #a94442; /* red */
 }
+.form-heading{
+  padding-top: 15px;
+    padding-bottom:10px;
+    margin-bottom: 0px;
+    font-size:28px;
+    font-weight: 900;
+    text-decoration: none;
+    text-align:justify;
+     color :black;
+      text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+  .my-card{
+    text-align: center;
+    padding-top:10px;
+    margin-top: 15px;
+    padding-right:10px;
+    padding-left:10px;
+     height:587px;
+    margin-left:30px;
+     /* border-right:solid rgba(167, 166, 166, 0.788) 5px ; */
+  }
 .errorBox{
     color : red;
     font-weight: 200px;

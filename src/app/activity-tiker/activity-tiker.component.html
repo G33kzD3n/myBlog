@@ -1,7 +1,7 @@
 <ul class="list-group list-group-flush">
   <li class="list-group-item" *ngFor="let activity of activities;let index=i">
-    <img *ngIf="activity?.avatar !=null" src="{{basePath}}{{activity?.avatar}}" data-toggle="tooltip" data-placement="top"
-      title="{{activity.author_name}}" routerLink="/users/{{activity.user_id}}">
+    <img src="{{basePath}}{{activity?.avatar}}" data-toggle="tooltip" data-placement="top" title="{{activity.author_name}}"
+      routerLink="/users/{{activity.user_id}}">
     <p>
       <ng-container>{{activity.type==="like" ? 'Liked the ':""}}</ng-container>
       <a routerLink="/posts/{{activity.post_id}}">
