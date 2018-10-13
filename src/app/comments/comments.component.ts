@@ -8,33 +8,33 @@ import { StorecommentService } from '../storecomment/storecomment.service';
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
-  styleUrls: ['./comments.component.css']
+  styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
-  public comments=[];
-  public show :Boolean = true;
-  public username :string;
-  public posts:any;
-  public loggedIn: Boolean =false;
+  public comments = [];
+  public show: Boolean = true;
+  public username: string;
+  public posts: any;
+  public loggedIn: Boolean = false;
   public editCommentId = 0;
   commentForm: FormGroup;
   published: Boolean = false;
-  routeParams :number;
-  noMoreComments :Boolean;
-  next:number=0;
+  routeParams: number;
+  noMoreComments: Boolean;
+  next: number = 0;
 
   constructor(public ar: ActivatedRoute, public commentsService: CommentsService, public fb: FormBuilder,
-  private storeCommentService:StorecommentService, public router:Router) {
+    private storeCommentService: StorecommentService, public router: Router) {
     this.next = 0;
-    this.noMoreComments= false;
-    }
+    this.noMoreComments = false;
+  }
 
   ngOnInit() {
     this.routeParams = this.ar.snapshot.params.id;
     this.username = localStorage.getItem('username');
-    if(this.username){
+    if (this.username) {
       console.log(this.username);
-      this.loggedIn=true;
+      this.loggedIn = true;
       this.commentForm = this.fb.group({
         body: ['', Validators.compose([Validators.required, Validators.minLength(5)])]
       });
@@ -52,32 +52,32 @@ export class CommentsComponent implements OnInit {
 
   loadPreviousComments(value) {
     const routeParams = this.ar.snapshot.params;
-    this.next+=2;
-    this.commentsService.getComments(routeParams.id,this.next)
+    this.next += 2;
+    this.commentsService.getComments(routeParams.id, this.next)
       .subscribe(
         result => {
           console.log(result);
           this.comments = this.comments.concat(result.comments);
           console.log(this.comments.length);
-          },
-          error => {
-            console.log(error);
+        },
+        error => {
+          console.log(error);
         });
   }
 
 
-  editComment(comment: string, commentId:number){
+  editComment(comment: string, commentId: number) {
     this.editCommentId = commentId;
-    this.show=false;
+    this.show = false;
     this.commentForm.controls['body'].setValue(comment);
     console.log(comment);
   }
 
   publishComment(comment: any) {
     console.log(this.editCommentId);
-    if(this.editCommentId>0){
+    if (this.editCommentId > 0) {
       this.updateComment(comment);
-      return ;
+      return;
     }
     let postId = this.ar.snapshot.params.id;
     let payload = {
@@ -102,15 +102,15 @@ export class CommentsComponent implements OnInit {
 
   }
 
-  updateComment(comment:string){
+  updateComment(comment: string) {
     comment = this.commentForm.controls['body'].value;
-    this.commentsService.updateComment(this.editCommentId,comment)
-    .subscribe(
+    this.commentsService.updateComment(this.editCommentId, comment)
+      .subscribe(
 
-      res =>{
+        res => {
           console.log(res);
           this.ngOnInit();
-      }
-    );
+        }
+      );
   }
 }

@@ -5,7 +5,7 @@ import { ActivityTikerService } from './activity-tiker.service';
 @Component({
   selector: 'app-activity-tiker',
   templateUrl: './activity-tiker.component.html',
-  styleUrls: ['./activity-tiker.component.css']
+  styleUrls: ['./activity-tiker.component.scss']
 })
 export class ActivityTikerComponent implements OnInit {
   username: string;

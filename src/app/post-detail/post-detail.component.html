@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-xs-12 col-md-12 col-sm-12">
-    <div class="card-deck " style="margin-left:5px; margin-right:10px;margin-top:0px;">
+  <div class="col-xs-10 col-md-10 col-sm-10">
+    <div class="card-deck">
       <div *ngIf="updated === true" class="alert alert-warning alert-dismissible show" role="alert">
         <strong>Holy guacamole!</strong> Post updated successfully.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="updated =false">
@@ -31,14 +31,14 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="row card-deck" style="padding-top:10px; margin-left:5px; margin-right:10px; height: 450px;">
-  <div class="card col-md-12" style="width: 60%;padding-top:0px;">
-    <div class=" card-body
-    ">
-      <app-comments style=" cursor: pointer">
+    <div class="card mt-2">
+      <app-comments style="cursor: pointer">
       </app-comments>
     </div>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 tiker-plr">
+    <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-fire tiker-icon"> </i>
+        Activities</b></p>
+    <app-activity-tiker *ngIf="loggedIn === true"></app-activity-tiker>
   </div>
 </div>

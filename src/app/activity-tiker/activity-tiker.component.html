@@ -1,32 +1,36 @@
-<ul class="list-group list-group-flush">
-  <li class="list-group-item" *ngFor="let activity of activities;let index=i">
-    <img src="{{basePath}}{{activity?.avatar}}" data-toggle="tooltip" data-placement="top" title="{{activity.author_name}}"
-      routerLink="/users/{{activity.user_id}}">
-    <p>
-      <ng-container>{{activity.type==="like" ? 'Liked the ':""}}</ng-container>
-      <a routerLink="/posts/{{activity.post_id}}">
-        {{activity.type==="like"? "Post ":""}}
-      </a>
-      <span *ngIf="activity.type === 'like'" class="text-muted font-10" data-toggle="tooltip" data-placement="top"
-        title="{{ activity.updated_at | date:' dd MMM yyyy'}}">
-        At{{ activity.updated_at | date:" hh:mm a"}}
-      </span>
-      {{activity.type ==="post" ?' Published a ':""}}
-      <a *ngIf="activity.type === 'post'" routerLink="/posts/{{activity.post_id}}">{{activity.type==="post"?
-        "Post ":""}}</a>
-      <span *ngIf="activity.type === 'post'" class="text-muted font-10" ata-toggle="tooltip" data-placement="top" title="{{ activity.updated_at | date:' dd MMM yyyy'}}">At
-        {{ activity.updated_at |
-        date:"
-        hh:mm a"}}
-      </span>
-      {{activity.type === "comment" ? "Commented on " :""}}
-      <a routerLink="/posts/{{activity.post_id}}" ata-toggle="tooltip" data-placement="top" title="{{ activity.updated_at | date:' dd MMM yyyy'}}">
-        {{activity.type === "comment" ? "Post " :""}}</a><span *ngIf="activity.type === 'comment'" class="font-10">At{{activity.updated_at
-        | date:" hh:mm a"}}
-      </span>
-      {{activity.type==="follower" ? 'Followed you ' :""}}<span *ngIf="activity.type === 'follower'" class="text-muted font-10"
-        ata-toggle="tooltip" data-placement="top" title="{{ activity.updated_at | date:' dd MMM yyyy'}}">At
-        {{ activity.updated_at | date:" hh:mm a"}}</span>
-    </p>
-  </li>
-</ul>
+<div class="tiker pt-0">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let activity of activities;let index=i">
+      <img src="{{basePath}}{{activity?.avatar}}" data-toggle="tooltip" data-placement="top" title="{{activity.author_name}}"
+        routerLink="/users/{{activity.type =='follower' ?activity?.id : activity?.user_id}}">
+      <p>
+        <ng-container>{{activity.type==="like" ? 'Liked the ':""}}</ng-container>
+        <a routerLink="/posts/{{activity.post_id}}">
+          {{activity.type==="like"? "Post ":""}}
+        </a>
+        <span *ngIf="activity.type === 'like'" class="text-muted font-10" data-toggle="tooltip" data-placement="top"
+          title="{{ activity.updated_at | date:' dd MMM yyyy'}}">
+          At{{ activity.updated_at | date:" hh:mm a"}}
+        </span>
+        {{activity.type ==="post" ?' Published a ':""}}
+        <a *ngIf="activity.type === 'post'" routerLink="/posts/{{activity.post_id}}">{{activity.type==="post"?
+          "Post ":""}}</a>
+        <span *ngIf="activity.type === 'post'" class="text-muted font-10" ata-toggle="tooltip" data-placement="top"
+          title="{{ activity.updated_at | date:' dd MMM yyyy'}}">At
+          {{ activity.updated_at |
+          date:"
+          hh:mm a"}}
+        </span>
+        {{activity.type === "comment" ? "Commented on " :""}}
+        <a routerLink="/posts/{{activity.post_id}}" ata-toggle="tooltip" data-placement="top" title="{{ activity.updated_at | date:' dd MMM yyyy'}}">
+          {{activity.type === "comment" ? "Post " :""}}</a><span *ngIf="activity.type === 'comment'" class="font-10">At{{activity.updated_at
+          | date:" hh:mm a"}}
+        </span>
+        {{activity.type==="follower" ? 'Followed you ' :""}}<span *ngIf="activity.type === 'follower'" class="text-muted font-10"
+          ata-toggle="tooltip" data-placement="top" title="{{ activity.updated_at | date:' dd MMM yyyy'}}">At
+          {{ activity.updated_at | date:" hh:mm a"}}</span>
+      </p>
+    </li>
+  </ul>
+  <hr style="margin-top:0px!important;">
+</div>

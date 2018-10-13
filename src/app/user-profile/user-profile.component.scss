@@ -1,0 +1,86 @@
+@import 'src/styles.scss';
+a{
+    text-decoration: none;
+}
+h5{
+    text-align: center!important;
+    text-align: justify;
+}
+.bt-2-gray{
+    border-top: solid 2px gray ;
+    padding-left:15px!important;
+    padding-right: 15px !important;
+}
+.img-cover{
+   height: 300px;
+}
+.img-avatar-followers{
+     margin-left:0px !important;
+     margin-right:0px !important;
+     height:90%!important;
+      width:90%!important;
+      border: solid gainsboro 1px;
+      margin-top: 0px!important;
+}
+
+li{
+    cursor: pointer;
+    height: auto!important;
+     padding-top: 5px!important;
+    padding-bottom: 5px!important;
+}
+
+.img-thumbnail{
+    height:250px;
+    width:250px;
+    left: 10%;
+    right:10%;
+    top: 20%;
+    position: absolute;
+    margin-top:-135px;
+}
+.points{
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing:1px;
+    color: #273751;
+}
+
+.makeactive{
+    cursor: pointer;
+    color:$link-color-on-hover!important;
+    font-weight: 500!important;
+    border-left:solid #dee2e6 1px;
+    border-top:solid #dee2e6 1px;
+    border-right:solid #dee2e6 1px;
+}
+
+
+.follow-btn:hover{
+    color:white;
+    background:$link-color-on-hover;
+}
+.privacy-lock{
+    color:black;
+    font-size: 16px;
+}
+.hide{
+    display: none;
+}
+ul .a-names :hover{
+    cursor: pointer;
+    color :rgba(178, 179, 177, 0.856);
+}
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+.errorBox{
+    color : red;
+    font-weight: 200px;
+    font-size: 16px;
+    margin:2px;
+    float: left;
+}

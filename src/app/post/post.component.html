@@ -1,29 +1,30 @@
 <div class="row">
-  <div class="col-md-10">
-    <div class="card my-card">
-      <h2 class="form-heading">{{heading}}</h2>
+  <div class="col-md-10 mt-2" style=" overflow-y:scroll;
+    height: 590px;">
+    <div class="card p-5  h-auto w-100">
+      <h2 class="h2 large text-dark text-center font-weight-normal">{{heading}}</h2>
       <hr>
       <form [formGroup]="postForm" (ngSubmit)="postBlog(postForm)" class="pull-left">
         <div class="form-group">
-          <label for="title" class="pull-left h5">Title for the article.</label>
+          <label for="title" class="pull-left medium">Title for the article.</label>
           <input type="text" formControlName="title" class="form-control" name="title" id="title" i18n-placeholder
             placeholder="Write the title for you article here.">
         </div>
-        <div class="errorBox" *ngIf="postForm.controls['title'].hasError('required') && postForm.controls['title'].touched">
+        <div class="errorBox w-100" *ngIf="postForm.controls['title'].hasError('required') && postForm.controls['title'].touched">
           *Title is required.
         </div>
-        <div class="errorBox" *ngIf="postForm.controls['title'].hasError('minlength') && postForm.controls['title'].touched">
+        <div class="errorBox w-100" *ngIf="postForm.controls['title'].hasError('minlength') && postForm.controls['title'].touched">
           *Length must be more than 20.
         </div>
         <div class="form-group">
-          <label for="body" class="pull-left h5">Body for the article.</label>
+          <label for="body" class="pull-left medium">Body for the article.</label>
           <textarea i18n-textarea rows="12" formControlName="body" cols="10" type="text" class="form-control" name="body"
             id="body" placeholder="Amaze us with your thoughts, write the content for your post here."> </textarea>
         </div>
-        <div class="errorBox" *ngIf="postForm.controls['body'].hasError('required') && postForm.controls['body'].touched">
+        <div class="errorBox w-100" *ngIf="postForm.controls['body'].hasError('required') && postForm.controls['body'].touched">
           *Body is required.
         </div>
-        <div class="errorBox" *ngIf="postForm.controls['body'].hasError('minlength') && postForm.controls['body'].touched">
+        <div class="errorBox w-100" *ngIf="postForm.controls['body'].hasError('minlength') && postForm.controls['body'].touched">
           *Body must be more than 20.
         </div>
         <div class="row">
@@ -40,9 +41,9 @@
       </form>
     </div>
   </div>
-  <!-- <div class="col-md-1" style="margin-left:0px; margin-right:0px;margin-top:15px; border-right:solid rgba(167, 166, 166, 0.788) 5px ;">
-  </div> -->
-  <div class="col-md-2 col-sm-2 col-xs-2 tiker">
+  <div class="col-md-2 col-sm-2 col-xs-2 tiker-plr">
+    <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-fire tiker-icon"> </i>
+        Activities</b></p>
     <app-activity-tiker></app-activity-tiker>
   </div>
 </div>

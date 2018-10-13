@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
   editProfileForm: FormGroup;
@@ -79,15 +79,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.init();
     const routeParams = this.ar.snapshot.params;
     if (localStorage.getItem('userId')) {
       this.loggedInUserId = localStorage.getItem('userId');
       this.loggedIn == true;
     } else {
       this.loggedIn == false;
+      return this.router.navigate(['posts']);
     }
+    this.init();
   }
+
 
   showProfile(userId) {
     if (localStorage.getItem('userId')) {
@@ -120,6 +122,7 @@ export class UserProfileComponent implements OnInit {
             if (this.user.privacy == false) {
               this.getPrivacyList(userId).subscribe(
                 (res: any) => {
+                  this.canSee = true;
                   this.followingTo = res[0].following;
                   this.myFollowers = res[0].followers;
                 });

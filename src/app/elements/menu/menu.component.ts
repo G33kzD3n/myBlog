@@ -15,24 +15,13 @@ export class MenuComponent implements OnInit {
   paramStatus = "";
   userId: any;
   constructor(public router: Router, public fb: FormBuilder, public loginService: LoginService, public ar: ActivatedRoute) {
-    this.ar.queryParams.subscribe(
-      (param) => {
-        if ('newuser' == param.status) {
-          console.log("******inside menu**");
-          console.log(param);
-          console.log("********" + 'newuser' == param.status);
-          console.log("******menu**");
-          this.paramStatus = 'newuser';
-          this.refreshComponent(this.ar.snapshot.params.id);
-          // this.ngOnInit();
-        }
-      });
+
   }
   ngOnInit() {
+    this.init();
     this.loginForm = this.fb.group({
       'username': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
     });
-
     const status = this.ar.snapshot.queryParamMap.has('status');
     console.log("local" + localStorage.getItem('username'));
     if (localStorage.getItem('username')) {
@@ -41,7 +30,15 @@ export class MenuComponent implements OnInit {
       this.userId = localStorage.getItem('userId');
     }
   }
-
+  init() {
+    this.ar.queryParams.subscribe(
+      (param) => {
+        if ('newuser' == param.status) {
+          this.paramStatus = 'newuser';
+          this.refreshComponent(this.ar.snapshot.params.id);
+        }
+      });
+  }
 
   attemptLogin(form: any) {
     this.loginService.login(form.controls['username'].value)

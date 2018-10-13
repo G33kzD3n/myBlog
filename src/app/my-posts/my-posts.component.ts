@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-my-posts',
   templateUrl: './my-posts.component.html',
-  styleUrls: ['./my-posts.component.css']
+  styleUrls: ['./my-posts.component.scss']
 })
 export class MyPostsComponent implements OnInit {
   posts: any[] = [];

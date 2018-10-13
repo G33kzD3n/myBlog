@@ -7,7 +7,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css'],
+  styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
   posts: any[] = [];
@@ -80,6 +80,7 @@ export class PostsComponent implements OnInit {
     this.likesService.likeToggle(this.posts[index][0].id, localStorage.getItem('username')).subscribe(
       res => {
         this.posts[index].total = res.likes_count;
+        this.loadPosts();
       }
     );
   }
