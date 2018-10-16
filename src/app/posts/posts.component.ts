@@ -21,6 +21,9 @@ export class PostsComponent implements OnInit {
     public postService: PostService, private likesService: LikesService, private followerService: FollowerService,
     public ar: ActivatedRoute, public router: Router
   ) {
+    this.init();
+  }
+  init() {
     this.ar.queryParams.subscribe(
       (param) => {
         console.log(param);
@@ -41,11 +44,14 @@ export class PostsComponent implements OnInit {
           this.refreshComponent();
           //this.ngOnInit();
         }
-      }
-    );
+        if ('auth_failure' == param.status) {
+          this.paramStatus = 'auth_failure';
+          this.refreshComponent();
+        }
+      });
   }
-
   ngOnInit() {
+
     console.log("loaded posts");
     this.ar.params.subscribe(
       (params) => {
@@ -80,7 +86,7 @@ export class PostsComponent implements OnInit {
     this.likesService.likeToggle(this.posts[index][0].id, localStorage.getItem('username')).subscribe(
       res => {
         this.posts[index].total = res.likes_count;
-        this.loadPosts();
+        this.ngOnInit();
       }
     );
   }
@@ -114,5 +120,16 @@ export class PostsComponent implements OnInit {
       this.username = localStorage.getItem('username');
       this.router.navigate(['posts']);
     }
+    if (this.paramStatus == 'auth_failure') {
+      this.paramStatus = '';
+      this.posts = [];
+      this.message = "This feature isn't yet available.";
+      this.myFollowersPosts = [];
+      this.loggedIn = true;
+      this.username = localStorage.getItem('username');
+      this.router.navigate(['posts']);
+    }
+
   }
+
 }

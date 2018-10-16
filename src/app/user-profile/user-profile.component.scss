@@ -14,6 +14,9 @@ h5{
 .img-cover{
    height: 300px;
 }
+.btn-border-blue:hover{
+    background:#007bff!important;
+}
 .img-avatar-followers{
      margin-left:0px !important;
      margin-right:0px !important;
@@ -25,17 +28,14 @@ h5{
 
 li{
     cursor: pointer;
-    height: auto!important;
-     padding-top: 5px!important;
-    padding-bottom: 5px!important;
 }
 
 .img-thumbnail{
-    height:250px;
-    width:250px;
-    left: 10%;
-    right:10%;
-    top: 20%;
+    height:230px;
+    width:230px;
+    left: -71%;
+    right:43%;
+    top: -20%;
     position: absolute;
     margin-top:-135px;
 }
@@ -62,7 +62,7 @@ li{
 }
 .privacy-lock{
     color:black;
-    font-size: 16px;
+    font-size: 13px;
 }
 .hide{
     display: none;

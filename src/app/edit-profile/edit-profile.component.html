@@ -1,15 +1,17 @@
 <div class="row">
-  <div class="col-md-10 mt-2">
-    <div class="card" style="overflow-y:scroll; height:590px;">
+  <div class="col-md-10 mt-2" style="overflow-y:scroll; height:590px;">
+    <div class="card">
       <div class="row">
         <div class="col col-md-10 col-xs-10 h-auto w-25">
           <h3 class="h3 text-dark large text-center w-100">Edit profile</h3>
+          <!-- <hr class="pl-1 pr-1"> -->
         </div>
         <div class="col col-md-2 col-xs-2 pull-right w-100">
           <button class="btn btn-dark btn-sm w-75 h-auto" (click)="redirectToViewProfile()">
             <i class="fa fa-arrow-left pr-3"></i>Back</button>
+          <!-- <hr class="pl-1 pr-1"> -->
         </div>
-        <hr class="p-0">
+        <!-- <hr> -->
       </div>
       <div class="row w-100">
         <div class="col col-md-12 pl-5 ">
@@ -30,7 +32,7 @@
               </div>
             </div>
             <div class="row mt-0">
-              <div class="form-group col-md-12 ">
+              <div class="form-group col-md-9">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="radiogroup" id="privacyPublic" value="false"
                     [checked]="user?.privacy==false" (change)="privacyValue('public')">
@@ -43,7 +45,7 @@
                 </div>
               </div>
             </div>
-            <button type="submit" [disabled]="!editProfileForm.valid" class="btn btn-primary btn-sm w-25 mb-2 d-block">Save</button>
+            <button type="submit" [disabled]="!editProfileForm.valid" class="col-md-2 btn btn-sm btn-primary mb-2 d-block">Save</button>
           </form>
         </div>
       </div>
@@ -95,8 +97,8 @@
           </div>
           <form [formGroup]="visiblityForm" (ngSubmit)="updatePrivacy()">
             <div formArrayName="visiblity">
-              <ul class="list-group list-group-flush " *ngFor="let vis of visiblityForm.controls.visiblity.controls | filterPipe : searchText ; let i = index">
-                <li class="list-group-item w-auto h-auto" [formGroupName]="i">
+              <ul class="list-group list-group-flush  " *ngFor="let vis of visiblityForm.controls.visiblity.controls | filterPipe : searchText ; let i = index">
+                <li class="list-group-item w-auto h-auto pt-1 pb-0" [formGroupName]="i">
                   <div class="row">
                     <span class="text-muted small pull-left">{{vis.get('is').value =='both'?'You both
                       follow each
@@ -105,20 +107,21 @@
                       =='follower'?'Follows you':''}}</span>
                   </div>
                   <div class="row">
-                    <div class="col-md-1">
-                      <img readonly *ngIf="vis.get('avatar').value !=null" src="http://localhost:9100/avatars/{{vis.get('avatar').value}}"
+                    <div class="col-md-1 pt-1 pb-2">
+                      <img readonly *ngIf="vis.get('avatar').value !=null" src="{{basePath}}{{vis.get('avatar').value}}"
                         width="40px;" class="img-fluid rounded-circle img-avatar-followers pull-left">
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-7 pt-1 pb-2">
                       <span class=" row text-dark">{{vis.get('name').value}}</span>
-                      <a class="row text-dark username-color w-25" routerLink="/users/{{vis.get('followingId').value}}"><span><b>{{vis.get('name').value}}</b>
-                          <i class="fa fa-lock privacy-lock pr-2" *ngIf="vis.get('privacy').value"></i>
+                      <a class="row text username-color w-25" routerLink="/users/{{vis.get('followingId').value}}"><span
+                          class="small ls-1">{{vis.get('name').value}}
+                          <i class="fa fa-lock privacy-lock pl-2" *ngIf="vis.get('privacy').value"></i>
                         </span>
                       </a>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 pt-1 pb-2">
                     </div>
-                    <div class=" col-md-2 form-check pull-right" style="padding-left:40px;">
+                    <div class=" col-md-2 form-check pull-right pt-2 pb-2" style="padding-left:40px;">
                       <input class="form-check-input" type="checkbox" (change)="toggleCanSee(i)" [checked]="vis.get('cansee').value">
                       <label class="form-check-label" for="following?.id">
                         Allow
@@ -128,15 +131,18 @@
                 </li>
               </ul>
             </div>
-            <button class="btn btn-primary" style="margin-top:10px">Update Privacy</button>
+            <button class="col-md-2 btn btn-sm btn-primary pull-right">Update Privacy</button>
           </form>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 tiker-plr">
-    <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-fire tiker-icon"> </i>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 tiker-plr" *ngIf="loggedIn === true">
+    <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-clock tiker-icon"> </i>
         Activities</b></p>
     <app-activity-tiker></app-activity-tiker>
+    <p class="h5 lead text-muted text-center tiker-heading pt-0"><b><i class="fa fa-hotjar tiker-icon"> </i>
+        Hot Topics</b></p>
+    <app-hot-topics></app-hot-topics>
   </div>
 </div>

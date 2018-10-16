@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyPostsService } from './my-posts.service';
 import { LikesService } from '../likes/likes.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-my-posts',
@@ -16,13 +16,20 @@ export class MyPostsComponent implements OnInit {
   username: string;
   loggedIn = false;
 
-  constructor(public myPostsService: MyPostsService, public likesService: LikesService, public router: Router) { }
+  constructor(
+    public myPostsService: MyPostsService, public likesService: LikesService,
+    public router: Router, public ar: ActivatedRoute) { }
 
   ngOnInit() {
     this.username = "";
+    let loggedInUserId = localStorage.getItem('userId');
     if (localStorage.getItem('username')) {
       this.loggedIn = true;
       this.username = localStorage.getItem('username');
+      //views other users posts not yet availabe
+      if (this.ar.snapshot.params.id != loggedInUserId) {
+        return this.router.navigate(['posts'], { queryParams: { status: 'auth_failure' } });
+      }
       this.loadMyPosts();
     } else {
       this.router.navigate(['posts']);

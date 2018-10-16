@@ -1,0 +1,14 @@
+<div class="hot-topics pt-0">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let post of posts;let index=i">
+      <div class="row">
+        <div class="col-md-12 w-100 pl-3 pr-3 pt-1 pb-1">
+          <i class="fa fa-fire tiker-icon pl-0 pr-2"></i>
+          <a routerLink="/posts/{{post?.id}}">{{post?.title}}
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <hr style="margin-top:0px!important;">
+</div>

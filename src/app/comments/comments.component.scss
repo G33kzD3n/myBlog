@@ -2,7 +2,20 @@
     margin-top: 0px;
    text-align:center;
 }
-
+.errorBox{
+    color : red;
+    font-weight: 200px;
+    font-size: 13px;
+    margin:2px;
+    float: left;
+}
+.img-avatar-followers{
+     margin-left:0px;
+     margin-right:5px;
+      height:40px;
+      float:left;
+      display:block
+}
 #comments-block{
      margin-top: 20px;
      text-align :left;

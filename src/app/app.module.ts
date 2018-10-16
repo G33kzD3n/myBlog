@@ -22,6 +22,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { MyPostsComponent } from './my-posts/my-posts.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FilterPipePipe } from './filter-pipe.pipe';
+import { HotTopicsComponent } from './hot-topics/hot-topics.component';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 registerLocaleData(localeAr, 'ar', localeArExtra)
@@ -42,6 +43,7 @@ registerLocaleData(localeAr, 'ar', localeArExtra)
     MyPostsComponent,
     EditProfileComponent,
     FilterPipePipe,
+    HotTopicsComponent,
 
   ],
   imports: [

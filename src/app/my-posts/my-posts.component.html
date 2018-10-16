@@ -6,18 +6,17 @@
     <ul class="list-group list-group-flush posts-ul pt-0">
       <li class="list-group-item posts-li" *ngFor="let post of posts ; let i=index">
         <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 pt-0">
-            <img *ngIf="post[0].picture != null" class="img-fluid rounded-circle mx-auto d-block posts-thumbnail-img"
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 pt-0 {{post[0].picture != null ? '' : ' d-none '}}">
+            <img *ngIf="post[0].picture !=null " class="img-fluid rounded-circle mx-auto d-block posts-thumbnail-img"
               src="{{basePath}}{{post[0].picture}}" alt="Card image cap">
           </div>
           <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">
             <a routerLink="/posts/{{post[0].id}}">
-              <h2 class="text-secondary "><Strong>{{post[0].title}}</Strong> </h2>
+              <h4 class="text-secondary "><Strong>{{post[0].title}}</Strong> </h4>
             </a>
             <p class="h6">
-              <b>
-                <a class="text-dark username-color" routerLink="/users/{{post[0].user.id}}">({{post[0].user.authorName}})</a>
-              </b><br>
+              <a class="text-dark username-color ls-1" routerLink="/users/{{post[0].user.id}}">({{post[0].user.authorName}})</a>
+              <br>
               <small class="text-muted" i18n="@@lastupdated" i18n="last updated | The text for last updated">
                 Last updated {{ post[0].updatedAt.date | date:"MMM dd yyyy 'at' hh:mm a"}}
               </small><br>
@@ -30,10 +29,10 @@
             </p>
             <div clas="row">
               <span class="badge like-span">{{post.total_likes}}
-                <i *ngIf="loggedIn===true" (click)="like(i)" class="fa fa-thumbs-up like-span-btn"></i>
+                <i *ngIf="loggedIn===true" (click)="like(i)" class="fa fa-thumbs-up like-span-btn {{post?.liked == 0 ? 'like-inactive' :'like-active'}} pl-0"></i>
               </span>
               <span class="badge  like-span">{{post?.total_comments}}
-                <i *ngIf="loggedIn===true" routerLink="/posts/{{post[0].id}}" class="fa fa-comments like-span-btn"></i>
+                <i *ngIf="loggedIn===true" routerLink="/posts/{{post[0].id}}" class="fa fa-comments like-span-btn pl-0"></i>
               </span>
             </div>
           </div>
@@ -42,9 +41,12 @@
     </ul>
     <hr>
   </div>
-  <div class="col-md-2 col-sm-2 col-xs-2 tiker-plr">
-    <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-fire tiker-icon"> </i>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 tiker-plr" *ngIf="loggedIn === true">
+    <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-clock tiker-icon"> </i>
         Activities</b></p>
-    <app-activity-tiker *ngIf="loggedIn === true"></app-activity-tiker>
+    <app-activity-tiker></app-activity-tiker>
+    <p class="h5 lead text-muted text-center tiker-heading pt-0"><b><i class="fa fa-fire tiker-icon"> </i>
+        Hot Topics</b></p>
+    <app-hot-topics></app-hot-topics>
   </div>
 </div>

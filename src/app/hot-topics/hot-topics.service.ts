@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { AppService } from '../app.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MyPostsService {
+export class HotTopicsService {
 
   constructor(public http: HttpClient, public app: AppService) { }
 
-  getMyPosts() {
-    let userId = localStorage.getItem('userId');
-    console.log(this.app.baseUrl + '/posts?user=' + userId);
-    return this.http.get(this.app.baseUrl + '/posts?user=' + userId);
+  getHotTopics(): Observable<any> {
+    return this.http.get(this.app.baseUrl + '/tikers/hotTopics');
   }
 }

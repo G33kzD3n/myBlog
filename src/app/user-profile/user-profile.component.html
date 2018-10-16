@@ -18,24 +18,23 @@
               alt="Card image cap">
           </div>
           <div class="col col-md-2 pull-right">
-            <button *ngIf="loggedInUserId != user?.id && loggedIn" (click)="follow(user?.id)" class="btn {{follower ==1?'btn-primary':'btn-default'}} btn-sm w-100">{{follower
+            <button *ngIf="loggedInUserId != user?.id && loggedIn" (click)="follow(user?.id)" class="btn {{follower ==1?'btn-primary':'bg-white btn-border-blue'}} btn-sm w-100">{{follower
               == 1
               ?"Following":"Follow"}}
             </button>
           </div>
         </div>
-        <div class="row mt-5 ">
-          <div class="col col-xs-3"></div>
-          <div class="col col-xs-6">
-            <h5 class="h5 mt-4 w-100"><i class="fa fa-user pr-1"></i>{{user?.name}}</h5>
-            <h5 class="card-title w-100">
-              <i class="fa {{user?.gender == false ? ' fa-male':' fa-female'}} pr-4"></i>
-              <Strong>{{ user?.authorName}}</Strong>
+        <div class="row mt-2">
+          <div class="col col-xs-3 pt-0 pb-0 h-auto"></div>
+          <div class="col col-xs-6 pt-0 pb-0 h-auto">
+            <h5 class="h5 mt-4 w-100"><i class="fa {{user?.gender? 'fa-male':' fa-female'}} pr-1"></i>{{user?.name}}</h5>
+            <h5 class="card-title w-100 text-dark ls-1">
+              {{ user?.authorName}}
             </h5>
             <h5 class="card-title w-100">
               <i class="fa fa-briefcase pr-1"></i>{{ user?.profession}}</h5>
           </div>
-          <div class="col col-xs-3">
+          <div class="col col-xs-3 pt-0 pb-0 h-auto">
             <div (click)="showEditProfileFeature()" *ngIf="loggedInUserId == user?.id && loggedIn">
               <i class="fa fa-edit mt-4 " style="cursor: pointer"></i>
             </div>
@@ -68,25 +67,25 @@
             <div class="tab-content">
               <div *ngIf="showFollowers === true">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item " *ngFor="let follower of myFollowers">
+                  <li class="list-group-item h-auto pt-1 pb-0" *ngFor="let follower of myFollowers">
                     <div class="row">
                       <span class="text-muted pull-left small">{{follower?.is =='both'?'You both follow
                         each
                         other':''}}</span>
                     </div>
                     <div class="row">
-                      <div class="col-md-1">
-                        <img *ngIf="follower?.avatar !=null" src="http://localhost:9100/avatars/{{follower?.avatar}}"
-                          width="40px;" class=" img-fluid rounded-circle img-avatar-followers pull-left">
+                      <div class="col-md-1 pt-1 pb-1">
+                        <img *ngIf="follower?.avatar !=null" src="{{basePath}}{{follower?.avatar}}" width="40px;" class=" img-fluid rounded-circle img-avatar-followers pull-left">
                       </div>
-                      <div class="col-md-8">
+                      <div class="col-md-8 pt-1 pb-1">
                         <span class="row text-dark">{{follower?.name}}</span>
                         <a class="row text-dark username-color w-25" routerLink="/users/{{follower?.id}}">
-                          <span><b>{{follower?.authorName}} </b><i class="fa fa-lock privacy-lock pl-2" *ngIf="follower?.privacy"></i></span>
+                          <span class="small ls-1">{{follower?.authorName}}<i class="fa fa-lock privacy-lock pl-2"
+                              *ngIf="follower?.privacy"></i></span>
                         </a>
                       </div>
-                      <div class="col-md-2">
-                        <button *ngIf="loggedInUserId != follower?.id && loggedIn" (click)="follow(follower?.id)" class="btn btn-sm w-100 {{follower?.is =='both' ? 'btn-primary':'btn-default btn-border'}} follow-btn">{{follower?.is
+                      <div class="col-md-2 pt-1 pb-1">
+                        <button *ngIf="loggedInUserId != follower?.id && loggedIn" (click)="follow(follower?.id)" class="btn btn-sm w-100 {{follower?.is =='both' ? 'btn-primary':'bg-white btn-border-blue'}} follow-btn">{{follower?.is
                           ==
                           'both'
                           ?"Following":"Follow"}}
@@ -98,7 +97,7 @@
               </div>
               <div *ngIf="showFollowing === true">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item" *ngFor="let following of followingTo">
+                  <li class="list-group-item h-auto pt-1 pb-0" *ngFor="let following of followingTo">
                     <div class="row">
                       <span class="text-muted small pull-left">{{following?.is =='follower'?'Follows
                         you':''}}</span>
@@ -108,22 +107,22 @@
                         other':''}}</span>
                     </div>
                     <div class="row">
-                      <div class="col-md-1">
-                        <img *ngIf="following?.avatar !=null" src="http://localhost:9100/avatars/{{following?.avatar}}"
-                          width="40px;" class=" img-fluid rounded-circle img-avatar-followers pull-left">
+                      <div class="col-md-1 pt-1 pb-1">
+                        <img *ngIf="following?.avatar !=null" src="{{basePath}}{{following?.avatar}}" width="40px;"
+                          class=" img-fluid rounded-circle img-avatar-followers pull-left">
                       </div>
-                      <div class="col-md-8">
+                      <div class="col-md-8 pt-1 pb-1">
                         <span class="row text-dark">{{following?.name}}
                         </span>
-                        <a class="row text-dark username-color w-25" routerLink="/users/{{following?.id}}">
-                          <span class="">{{following?.authorName}}
+                        <a class="row text-dark username-color w-25 " routerLink="/users/{{following?.id}}">
+                          <span class="small ls-1">{{following?.authorName}}
                             <i class="fa fa-lock privacy-lock pl-2" *ngIf="following?.privacy"></i>
                           </span>
                         </a>
                       </div>
-                      <div class="col-md-2">
+                      <div class="col-md-2 pt-1 pb-1">
                         <button *ngIf="loggedInUserId != following?.id && loggedIn" (click)="follow(following?.id)"
-                          class="btn btn-sm w-100 {{following?.is =='both' ? 'btn-primary':'btn-default btn-border'}} follow-btn">{{following?.is
+                          class="btn btn-sm w-100 {{following?.is =='both' ? 'btn-primary':'bg-white btn-border-blue'}} follow-btn">{{following?.is
                           ==
                           'both'
                           ?"Following":"Follow"}}
@@ -139,9 +138,12 @@
       </div>
     </div>
   </div>
-  <div class="col-md-2 col-sm-2 col-xs-2 tiker-plr">
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 tiker-plr" *ngIf="loggedIn === true">
     <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-fire tiker-icon"> </i>
         Activities</b></p>
     <app-activity-tiker></app-activity-tiker>
+    <p class="h5 lead text-muted text-center tiker-heading pt-0"><b><i class="fa fa-fire tiker-icon"> </i>
+        Hot Topics</b></p>
+    <app-hot-topics></app-hot-topics>
   </div>
 </div>

@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   // title = 'Whats the all fuss about.';
 
-ngOnInit(){
-}
+  ngOnInit() {
+  }
 }

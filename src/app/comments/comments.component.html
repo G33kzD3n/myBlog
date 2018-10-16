@@ -23,40 +23,57 @@
       </div>
       <form *ngIf="loggedIn === true" [formGroup]="commentForm" (ngSubmit)="publishComment(commentForm)">
         <div class="form-group">
-          <textarea rows="10" cols="190" formControlName="body" type="text" class="form-control " name="body" id="body">Enter the body for comment. </textarea>
+          <textarea rows="10" cols="190" formControlName="body" type="text" class="form-control " name="body" id="body"
+            placeholder="Enter the comment."></textarea>
         </div>
-        <div class="errorBox w-100" *ngIf="commentForm.controls['body'].hasError('required') && commentForm.controls['body'].touched">
+        <div class="
+            errorBox w-100" *ngIf="commentForm.controls['body'].hasError('required') && commentForm.controls['body'].touched">
           *Body is required.
         </div>
         <div class="errorBox w-100" *ngIf="commentForm.controls['body'].hasError('minlength') && commentForm.controls['body'].touched">
           *Body must be more than 5.
         </div>
-        <button style="cursor: pointer ;position:relative;bottom:10px;" class="btn btn-primary btn-sm" id="publish-btn"
-          [disabled]="!commentForm.valid" type="submit">Publish
+        <button class="btn btn-primary btn-sm" style="cursor: pointer;" id="publish-btn" [disabled]="!commentForm.valid"
+          type="submit">Publish
         </button>
       </form>
     </div>
   </div>
-  <div class="row w-100">
-    <div class="col">
-      <div id="add-scroll-bar">
-        <blockquote *ngFor="let comment of comments">
-          <p class="comment-authorname" style="font-family: 'Acme', sans-serif; letter-spacing:1px">
-            <span>{{comment.user.authorName}}</span>
-            <span style="font-family: 'Montserrat', sans-serif;"> on</span>
-            <span>{{comment.updatedAt.date | date:"MMM dd yyyy 'at' hh:mm a"}}</span>
-          </p>
-          <span style="font-family: 'Montserrat', sans-serif;" data-canedit="true" class="comment-message">
-            {{comment.body}}
-          </span>
-          <i *ngIf="username === comment.user.authorName" (click)="editComment(comment.body, comment.id)" class="fa fa-pencil"
-            style="padding-left:5px">
-          </i>
-        </blockquote>
-      </div>
-      <a (click)="loadPreviousComments(next)" style="text-decoration-line: underline; color:blue;" i18n="Link view more comments | A link for view more comments">view
+  <div class="row w-100 justify-content-md-center mx-auto">
+    <div class="col-md-auto">
+      <a (click)="loadPreviousComments(next)" class="w-100 text-primary text-bold" i18n="Link view more comments | A link for view more comments">view
         previous
         comments</a>
+    </div>
+  </div>
+  <div class="row w-100">
+    <div class="col col-md-12 w-100 mx-auto pl-5 pr-5" style='overflow-y: auto;height:300px;'>
+      <ul class="w-100 list-group list-group-flush">
+        <li class="list-group-item h-auto" *ngFor="let comment of comments">
+          <div class="row mt-0 pt-0">
+            <div class="col-md-10 w-75 pt-1 pb-0">
+              <img data-toggle="tooltip" data-placement="top" title="{{comment.user.authorName}}" src="{{basePath}}/avatars/{{comment?.user?.avatar}}"
+                width="40px;" class=" img-fluid rounded-circle img-avatar-followers pull-left">
+              <span class="ml-2 text-muted small" style="font-size: 13px;">on
+                {{comment.updatedAt.date | date:"MMM dd
+                yyyy 'at'
+                hh:mm
+                a"}}</span>
+            </div>
+          </div>
+          <div class="row mt-0 mb-0">
+            <div class="col-md-12 w-75 pt-2 pb-0">
+              <blockquote>
+                <span data-canedit="true" class="text-dark text-normal text-justify">
+                  {{comment.body}}
+                </span>
+                <i *ngIf="username === comment.user.authorName" (click)="editComment(comment.body, comment.id)" class="fa fa-pencil pull-right">
+                </i>
+              </blockquote>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

@@ -41,9 +41,12 @@
       </form>
     </div>
   </div>
-  <div class="col-md-2 col-sm-2 col-xs-2 tiker-plr">
-    <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-fire tiker-icon"> </i>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 tiker-plr" *ngIf="loggedIn === true">
+    <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-clock tiker-icon"> </i>
         Activities</b></p>
     <app-activity-tiker></app-activity-tiker>
+    <p class="h5 lead text-muted text-center tiker-heading pt-0"><b><i class="fa fa-fire tiker-icon"> </i>
+        Hot Topics</b></p>
+    <app-hot-topics></app-hot-topics>
   </div>
 </div>

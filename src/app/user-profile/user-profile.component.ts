@@ -115,6 +115,7 @@ export class UserProfileComponent implements OnInit {
               (res: any) => {
                 this.followingTo = res[0].following;
                 this.myFollowers = res[0].followers;
+                this.basePath = res.base_url;
               });
             this.counter(null);
           } else {
@@ -123,6 +124,7 @@ export class UserProfileComponent implements OnInit {
               this.getPrivacyList(userId).subscribe(
                 (res: any) => {
                   this.canSee = true;
+                  this.basePath = res.base_url;
                   this.followingTo = res[0].following;
                   this.myFollowers = res[0].followers;
                 });
@@ -131,6 +133,7 @@ export class UserProfileComponent implements OnInit {
                 (res: any) => {
                   this.followingTo = res[0].following;
                   this.myFollowers = res[0].followers;
+                  this.basePath = res.base_url;
                   this.setProfileVisibility(this.myFollowers, this.followingTo);
                 }, err => {
                   console.log(err);

@@ -31,10 +31,16 @@ a:hover{
 .like-span-btn{
     padding-left:5px;
     font-size:15px;
-    color:$username-color!important;
+
 }
 .like-span-btn:hover{
     color:$link-color-on-hover!important;
+}
+.like-active{
+     color:$username-color!important;
+}
+.like-inactive{
+    color:black!important;
 }
 hr{
     position:relative;
@@ -61,7 +67,7 @@ hr{
 
 .tiker-heading{
     // margin-top:10px!important;
-    padding-top: 10px!important;
+    padding-top: 5px!important;
 }
 .tiker-icon{
     color:#ef6733;
@@ -79,7 +85,7 @@ hr{
     padding:0px 0px 0px 5px !important;
     ul{
         overflow-y: auto ;
-        height:370px;
+        height:350px;
     }
     li{
         padding:5px 0px 5px 5px !important;
@@ -88,9 +94,34 @@ hr{
         max-height:80%!important;
     }
 }
+.hot-topics{
+     margin-top: 0px!important;
+    cursor: pointer;
+     border-left:solid gray 5px;
+    font-size: 10px!important;
+    padding:0px 0px 0px 5px !important;
+    ul{
+        overflow-y: auto ;
+        height:190px;
+    }
+    li{
+        padding:5px 0px 5px 5px !important;
+        width:100%!important;
+        height:auto!important;
+        max-height:80%!important;
+    }
+
+}
 .pt-10{
     padding-top: 10px!important;
 }
 pt-0{
     padding-top: 0px!important;
+}
+.btn-border-blue{
+    border: solid $link-color-on-hover 1px;
+}
+
+.ls-1{
+    letter-spacing: 1px;
 }

@@ -19,14 +19,19 @@ export class PostComponent implements OnInit {
   post: any;
   edited: Boolean = false;
   published: Boolean = false;
+  loggedIn = false;
+
   constructor(public fb: FormBuilder,
     public postService: PostService, public router: Router, public ar: ActivatedRoute, public postDetailService: PostDetailService) {
 
   }
 
   ngOnInit() {
-    if (!localStorage.getItem('username')) {
-      this.router.navigate(['posts']);
+    if (localStorage.getItem('userId')) {
+      this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
+      return this.router.navigate(['posts']);
     }
     this.postForm = this.fb.group({
       title: ['', Validators.compose([Validators.required, Validators.minLength(2)])],

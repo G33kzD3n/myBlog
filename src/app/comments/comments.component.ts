@@ -4,6 +4,7 @@ import { PostDetailService } from '../post-detail/post-detail.service';
 import { CommentsService } from './comments.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { StorecommentService } from '../storecomment/storecomment.service';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-comments',
@@ -22,9 +23,11 @@ export class CommentsComponent implements OnInit {
   routeParams: number;
   noMoreComments: Boolean;
   next: number = 0;
+  basePath = this.app.baseUrl;
+  editCommentBtnClicked = false;
 
   constructor(public ar: ActivatedRoute, public commentsService: CommentsService, public fb: FormBuilder,
-    private storeCommentService: StorecommentService, public router: Router) {
+    private storeCommentService: StorecommentService, public router: Router, public app: AppService) {
     this.next = 0;
     this.noMoreComments = false;
   }
@@ -39,6 +42,9 @@ export class CommentsComponent implements OnInit {
         body: ['', Validators.compose([Validators.required, Validators.minLength(5)])]
       });
     }
+    this.loadLatestComments();
+  }
+  loadLatestComments() {
     this.commentsService.getComments(this.routeParams, this.next)
       .subscribe(
         result => {
@@ -49,7 +55,6 @@ export class CommentsComponent implements OnInit {
           console.log(error);
         });
   }
-
   loadPreviousComments(value) {
     const routeParams = this.ar.snapshot.params;
     this.next += 2;
@@ -69,6 +74,7 @@ export class CommentsComponent implements OnInit {
   editComment(comment: string, commentId: number) {
     this.editCommentId = commentId;
     this.show = false;
+    this.editCommentBtnClicked = true;
     this.commentForm.controls['body'].setValue(comment);
     console.log(comment);
   }
@@ -91,6 +97,7 @@ export class CommentsComponent implements OnInit {
           console.log(result);
           if (result.status === "success") {
             this.published = true;
+            this.comments = [];
             this.ngOnInit();
             // this.router.navigate(['posts/'+postId]);
           }
@@ -106,9 +113,9 @@ export class CommentsComponent implements OnInit {
     comment = this.commentForm.controls['body'].value;
     this.commentsService.updateComment(this.editCommentId, comment)
       .subscribe(
-
         res => {
           console.log(res);
+          this.comments = [];
           this.ngOnInit();
         }
       );

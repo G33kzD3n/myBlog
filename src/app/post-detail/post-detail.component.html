@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-10 col-md-10 col-sm-10">
+  <div class="col-xs-10 col-md-10 col-sm-10" style="overflow-y: auto; height: 590px">
     <div class="card-deck">
       <div *ngIf="updated === true" class="alert alert-warning alert-dismissible show" role="alert">
         <strong>Holy guacamole!</strong> Post updated successfully.
@@ -7,19 +7,21 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="card" style="margin-top:15px;">
+      <div class="card">
         <div class="card-body">
-          <img *ngIf="post[0]?.picture != null" class="card-img" id="card-img" style="max-height:700px; width:100%" src="{{basePath}}{{post[0]?.picture}}"
-            alt="Card image cap">
-          <h2 class="card-title a-title"><strong>{{post[0]?.title}}</strong></h2>
+          <div class="{{post[0].picture != null ? '' : ' d-none '}}">
+            <img *ngIf="post[0].picture !=null " class="card-img" id="card-img" style="max-height:700px; width:100%"
+              src="{{basePath}}{{post[0]?.picture}}" alt="Card image cap">
+          </div>
+          <h4 class="card-title text-secondary text-normal"><strong>{{post[0]?.title}}</strong></h4>
           <a *ngIf="username === post[0]?.user.authorName" class="btn btn-default" (click)="editPost(post[0]?.id)">
             <span style="font-size:20px;padding-right: 10px">Edit </span>
             <span class="fa fa-edit" aria-hidden="true" style="font-size:20px;">
             </span>
           </a>
           <p style="text-align:justify">{{post[0]?.body}}</p>
-          <p class="card-text p-name" id="author"><b>
-              <a routerLink="/users/{{post[0]?.user?.id}}">({{post[0]?.user?.name}})</a></b>
+          <p class="card-text p-name ls-1 " id="author">
+            <a routerLink="/users/{{post[0]?.user?.id}}">({{post[0]?.user?.authorName}})</a>
           </p>
           <p class="card-text " id="date">
             <small class="text-muted" i18n="@@lastupdated">Last updated {{post[0]?.updatedAt.date | date:"MMM dd yyyy
@@ -32,13 +34,15 @@
       </div>
     </div>
     <div class="card mt-2">
-      <app-comments style="cursor: pointer">
-      </app-comments>
+      <app-comments style="cursor:pointer"></app-comments>
     </div>
   </div>
-  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 tiker-plr">
-    <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-fire tiker-icon"> </i>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 tiker-plr" *ngIf="loggedIn === true">
+    <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-clock tiker-icon"> </i>
         Activities</b></p>
-    <app-activity-tiker *ngIf="loggedIn === true"></app-activity-tiker>
+    <app-activity-tiker></app-activity-tiker>
+    <p class="h5 lead text-muted text-center tiker-heading pt-0"><b><i class="fa fa-fire tiker-icon"> </i>
+        Hot Topics</b></p>
+    <app-hot-topics></app-hot-topics>
   </div>
 </div>

@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AppService } from 'src/app/app.service';
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public app: AppService) { }
 
- getPosts():Observable<any> {
-   const data = this.http.get('http://localhost:9100/posts');
-   return data;
+  getPosts(): Observable<any> {
+    console.log(this.app.baseUrl + '/posts');
+    const data = this.http.get(this.app.baseUrl + '/posts?hasliked=' + localStorage.getItem('userId'));
+    return data;
   }
 
-  savePost(post):Observable <any>{
-    return this.http.post('http://localhost:9100/posts/store',post);
+  savePost(post): Observable<any> {
+    return this.http.post(this.app.baseUrl + '/posts/store', post);
   }
 
 
-  updatePost(postId: number, payload: any): Observable<any>{
-    return this.http.post('http://localhost:9100/posts/update/'+postId,payload);
+  updatePost(postId: number, payload: any): Observable<any> {
+    return this.http.post(this.app.baseUrl + '/posts/update/' + postId, payload);
   }
 }

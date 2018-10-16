@@ -28,6 +28,7 @@ export class EditProfileComponent implements OnInit {
   errorMessage = null;
   dropdown_btn_name = "All";
   backup: any = [];
+  loggedIn = false;
   constructor(public ar: ActivatedRoute, public router: Router, public fb: FormBuilder, public profileService: UserProfileService, public followerService: FollowerService) {
     this.editProfileForm = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(2)])],
@@ -42,12 +43,16 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
     const routeParams = this.ar.snapshot.params;
     if (!this.isUserAllowedToVisit(routeParams.id)) {
+      this.loggedIn = false;
       return this.redirectToHome();
     }
     this.loggedInUserId = localStorage.getItem('userId');
 
     if (!this.loggedInUserId) {
+      this.loggedIn = false;
       return this.router.navigate(['posts']);
+    } else {
+      this.loggedIn = true;
     }
     this.getProfile();
   }
@@ -114,52 +119,7 @@ export class EditProfileComponent implements OnInit {
     this.editProfileForm.controls['profession'].setValue(this.user.profession);
     this.editProfileForm.controls['email'].setValue(this.user.email);
   }
-  filterUsers(e) {
-    const control = <FormArray>this.visiblityForm.controls['visiblity'];
-    if (e.target.value != "") {
-      let nameArray: any = [];
-      this.backup.forEach((element, index) => {
-        nameArray.push(element.name);
-      });
-      let indexArray: any = [];
-      nameArray.forEach((name, index) => {
-        if (name.match(new RegExp(e.target.value, "i"))) {
-          indexArray.push(index);
-        }
-      });
 
-      let users: any = [];
-
-
-      console.log("matched users are");
-      console.log(indexArray);
-
-      indexArray.forEach(element => {
-        console.log("index " + element);
-        this.backup.map(user => {
-          if (element == user.id) {
-            users.push(user);
-          }
-        });
-      });
-      console.log("^^^ length is b4 del " + this.visiblityForm.controls.visiblity.value.length);
-      // let i = 0;
-      if (this.visiblityForm.controls.visiblity.value.length > 0) {
-        this.resetVisiblity();
-      }
-      // while () {
-      //   control.removeAt(i);
-      //   i++;
-      // }
-      console.log("^^^ length is after del " + this.visiblityForm.controls.visiblity.value.length);
-      this.makeArray(control, users);
-      // control.push(users);
-      console.log("*****" + JSON.stringify(users));
-    }
-    else {
-      this.makeArray(control, this.backup);
-    }
-  }
   restoreContorlArray() {
     const control = <FormArray>this.visiblityForm.controls['visiblity'];
     this.makeArray(control, this.backup);

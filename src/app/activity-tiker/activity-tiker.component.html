@@ -1,7 +1,7 @@
 <div class="tiker pt-0">
   <ul class="list-group list-group-flush">
     <li class="list-group-item" *ngFor="let activity of activities;let index=i">
-      <img src="{{basePath}}{{activity?.avatar}}" data-toggle="tooltip" data-placement="top" title="{{activity.author_name}}"
+      <img data-toggle="tooltip" data-placement="top" title="{{activity.author_name}}" src="{{basePath}}{{activity?.avatar}}"
         routerLink="/users/{{activity.type =='follower' ?activity?.id : activity?.user_id}}">
       <p>
         <ng-container>{{activity.type==="like" ? 'Liked the ':""}}</ng-container>
