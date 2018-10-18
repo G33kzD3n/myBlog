@@ -3,43 +3,46 @@
     <div *ngIf="message != null" class="alert alert-warning alert-dismissible show" role="alert">
       <strong>Holy guacamole!</strong>{{message}}
     </div>
-    <ul class="list-group list-group-flush posts-ul pt-10">
-      <li class="list-group-item posts-li" *ngFor="let post of posts ; let i=index">
-        <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 pt-0 {{post[0].picture != null ? '' : ' d-none '}}">
-            <img *ngIf="post[0].picture !=null " class="img-fluid rounded-circle mx-auto d-block posts-thumbnail-img"
-              src="{{basePath}}{{post[0].picture}}" alt="Card image cap">
-          </div>
-          <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6 pt-0">
-            <a routerLink="/posts/{{post[0].id}}">
-              <h4 class="text-secondary"><Strong> {{post[0].title}}</Strong></h4>
-            </a>
-            <p class="text-normal">
-              <a class="text-dark username-color ls-1" routerLink="/users/{{post[0].user.id}}">({{post[0].user.authorName}})</a>
-              <br>
-              <small class="text-muted" i18n="@@lastupdated" i18n="last updated | The text for last updated">
-                Last updated {{ post[0].updatedAt.date | date:"MMM dd yyyy 'at' hh:mm a"}}
-              </small><br>
-            </p>
-            <p class="lead text-muted" style="max-height:300px">
-              <small>
-                {{ post[0].body.substring(1,300)}}
-              </small> <Strong>
-                <a data-toggle="tooltip " title="Click to view full post" routerLink="/posts/{{post[0].id}}">...</a></Strong>
-            </p>
-            <div clas="row">
-              <span class="badge  like-span">{{post?.total_likes}}
-                <i *ngIf="loggedIn===true" (click)="like(i)" class="fa fa-thumbs-up like-span-btn {{post?.liked == 0 ? 'like-inactive' :'like-active'}} pl-0"></i>
-              </span>
-              <span class="badge  like-span">{{post?.total_comments}}
-                <i *ngIf="loggedIn===true" routerLink="/posts/{{post[0].id}}" class="fa fa-comments like-span-btn pl-0"></i>
-              </span>
+    <div style="overflow-y:auto; height:590px">
+      <div class="card card--post mt-4 mb-5 col-md-10 p-0 mx-auto h-auto" *ngFor="let post of posts ; let i=index">
+        <div class=" pt-0 {{post[0].picture != null ? '' : ' d-none '}} post__image">
+          <img *ngIf="post[0].picture !=null " class="img-fluid d-block w-100 b.none" src="{{basePath}}{{post[0].picture}}"
+            alt="Card image cap">
+        </div>
+        <div class="m-5">
+          <span class="label username-color">
+            Date <span class="text-muted "> / </span>
+            <span class="text-muted small">{{post[0].updatedAt.date | date:"MMMM d, y"}}</span>
+          </span>
+          <h4 class="pt-2 h4"><a routerLink="/posts/{{post[0].id}}">{{post[0].title}}</a></h4>
+          <p class="text-muted text-small post__content truncate">
+            <small>
+              {{ post[0].body}}
+            </small></p>
+          <a class="text-small text-secondary small truncate::after" data-toggle="tooltip " title="Click to view full post"
+            routerLink="/posts/{{post[0].id}}">Read
+            more...</a>
+        </div>
+        <div class="post__footer">
+          <div class="post__author m-2">
+            <img class="author__image mt-0 mb-1" src="http://blog.me/avatars/{{post[0].user.avatar}}">
+            <div class="d-block pull-left">
+              <h5 class="author__name small w-100 mb-1">by <a routerLink="/users/{{post[0].user.id}}"><span class="username-color">{{post[0].user.name}}</span></a></h5>
+              <div class="author__links pl-0">
+                <span class="badge  like-span ">{{post?.total_likes}}
+                  <i *ngIf="loggedIn===true" (click)="like(i)" class="fa fa-thumbs-up like-span-btn {{post?.liked == 0 ? 'like-inactive' :'like-active'}} "></i>
+                  <i *ngIf="loggedIn==false" class="fa fa-thumbs-up like-span-btn {{post?.liked == 0 ? 'like-inactive' :'like-active'}} "></i>
+                </span>
+                <span class="badge  like-span">{{post?.total_comments}}
+                  <i *ngIf="loggedIn===true" routerLink="/posts/{{post[0].id}}" class="fa fa-comments like-span-btn "></i>
+                  <i *ngIf="loggedIn==false" routerLink="/posts/{{post[0].id}}" class="fa fa-comments like-span-btn "></i>
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </li>
-    </ul>
-    <hr>
+      </div>
+    </div>
   </div>
   <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 tiker-plr" *ngIf="loggedIn === true">
     <p class="h5 lead text-muted text-center tiker-heading"><b><i class="fa fa-clock tiker-icon"> </i>
@@ -50,3 +53,41 @@
     <app-hot-topics></app-hot-topics>
   </div>
 </div>
+
+<!-- <ul class="list-group list-group-flush posts-ul pt-10">
+          <li class="list-group-item posts-li" *ngFor="let post of posts ; let i=index">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 pt-0 {{post[0].picture != null ? '' : ' d-none '}}">
+                <img *ngIf="post[0].picture !=null " class="img-fluid rounded-circle mx-auto d-block posts-thumbnail-img"
+                  src="{{basePath}}{{post[0].picture}}" alt="Card image cap">
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6 pt-0">
+                <a routerLink="/posts/{{post[0].id}}">
+                  <h4 class="text-secondary"><Strong> {{post[0].title}}</Strong></h4>
+                </a>
+                <p class="text-normal">
+                  <a class="text-dark username-color ls-1" routerLink="/users/{{post[0].user.id}}">({{post[0].user.authorName}})</a>
+                  <br>
+                  <small class="text-muted" i18n="@@lastupdated" i18n="last updated | The text for last updated">
+                    Last updated {{ post[0].updatedAt.date | date:"MMM dd yyyy 'at' hh:mm a"}}
+                  </small><br>
+                </p>
+                <p class="lead text-muted" style="max-height:300px">
+                  <small>
+                    {{ post[0].body.substring(1,300)}}
+                  </small> <Strong>
+                    <a data-toggle="tooltip " title="Click to view full post" routerLink="/posts/{{post[0].id}}">...</a></Strong>
+                </p>
+                <div clas="row">
+                  <span class="badge  like-span">{{post?.total_likes}}
+                    <i *ngIf="loggedIn===true" (click)="like(i)" class="fa fa-thumbs-up like-span-btn {{post?.liked == 0 ? 'like-inactive' :'like-active'}} pl-0"></i>
+                  </span>
+                  <span class="badge  like-span">{{post?.total_comments}}
+                    <i *ngIf="loggedIn===true" routerLink="/posts/{{post[0].id}}" class="fa fa-comments like-span-btn pl-0"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <hr> -->

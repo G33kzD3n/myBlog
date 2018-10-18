@@ -79,7 +79,7 @@ export class PostsComponent implements OnInit {
 
         },
         error => {
-          console.log(JSON.parse(error._body));
+          console.log(error);
         });
   }
   like(index) {

@@ -25,13 +25,11 @@ a:hover{
 
 .like-span{
     cursor: pointer;
-    float:left;
+    float:left!important;
     font-size: 13px;
 }
 .like-span-btn{
-    padding-left:5px;
-    font-size:15px;
-
+    font-size:14px;
 }
 .like-span-btn:hover{
     color:$link-color-on-hover!important;

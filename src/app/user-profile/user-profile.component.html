@@ -33,6 +33,11 @@
             </h5>
             <h5 class="card-title w-100">
               <i class="fa fa-briefcase pr-1"></i>{{ user?.profession}}</h5>
+            <p class="text-small text-muted small blockquote-footer pl-0 text-align-left">
+              <cite title="Tagline">
+                {{user?.tagline}}
+              </cite></p>
+
           </div>
           <div class="col col-xs-3 pt-0 pb-0 h-auto">
             <div (click)="showEditProfileFeature()" *ngIf="loggedInUserId == user?.id && loggedIn">
@@ -83,6 +88,9 @@
                           <span class="small ls-1">{{follower?.authorName}}<i class="fa fa-lock privacy-lock pl-2"
                               *ngIf="follower?.privacy"></i></span>
                         </a>
+                        <cite title="Tagline" class="text-muted small blockquote-footer pl-0 text-align-left">
+                          {{follower?.tagline}}
+                        </cite>
                       </div>
                       <div class="col-md-2 pt-1 pb-1">
                         <button *ngIf="loggedInUserId != follower?.id && loggedIn" (click)="follow(follower?.id)" class="btn btn-sm w-100 {{follower?.is =='both' ? 'btn-primary':'bg-white btn-border-blue'}} follow-btn">{{follower?.is
